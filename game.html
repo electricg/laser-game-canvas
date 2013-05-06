@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Laser</title>
+	<style>
+*, *:after, *:before {
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+.game {
+	/*background: #CCC;*/
+	/*border: 1px solid #000;*/
+	display: inline-block;
+	margin: 10px;
+	position: relative;
+	/* http://stackoverflow.com/questions/3779534/how-to-disable-text-selection-with-css-or-js */
+	-webkit-user-select: none;
+	   -moz-user-select: none;
+}
+.game-clone {
+	left: 0;
+	position: absolute;
+	top: 0;
+	z-index: -1;
+}
+.game-wrapper {
+	display: inline-block;
+	font-size: 0;
+}
+.game-wrapper * {
+	font-size: 1rem;
+}
+.side {
+	border: 1px solid #000;
+	padding: 5px;
+	text-align: center;
+}
+.north, .south {
+	display: block;
+	height: 50px;
+	margin: 0 auto;
+	width: 612px;
+}
+.east, .west {
+	display: inline-block;
+	height: 612px;
+	vertical-align: top;
+	width: 50px;
+}
+	</style>
+	<script src="utils.js"></script>
+	<script src="mouse.js"></script>
+	<script src="game.js"></script>
+</head>
+<body onload="game(levelConfig);">
+
+	<div class="game-wrapper">
+		<div class="side north">North</div>
+		<div class="side west">West</div>
+		<div class="game" onselectstart="return false;">
+			<canvas id="game" height="600" width="600"></canvas>
+		</div>
+		<div class="side east">East</div>
+		<div class="side south">South</div>
+	</div>
+	
+	
+</body>
+</html>
