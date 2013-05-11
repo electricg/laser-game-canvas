@@ -50,7 +50,7 @@ var LAYOUT = {
 // example of level configuration
 var levelConfig = {
 	rows : 12,
-	columns : 12,
+	columns : 8,
 	lasers : [
 		{
 			cell : 66,
@@ -58,7 +58,7 @@ var levelConfig = {
 			dir : 'ne'
 		},
 		{
-			cell : 117,
+			cell : 95,
 			side : 'n',
 			dir : 'nw'
 		}
@@ -69,7 +69,7 @@ var levelConfig = {
 			side : 'e'
 		},
 		{
-			cell : 134,
+			cell : 89,
 			side : 's'
 		},
 		{
@@ -723,11 +723,11 @@ var game = function(_opt) {
 		var row = 0,
 			col = 0;
 
-		row = Math.ceil(cell / _opt.rows);
+		row = Math.ceil(cell / _opt.columns);
 		col = cell % _opt.columns;
 
 		if (col === 0) {
-			col = _opt.rows;
+			col = _opt.columns;
 		}
 
 		return {r: row, c: col};
@@ -740,7 +740,7 @@ var game = function(_opt) {
 	 * @returns {number} cell id
 	 */
 	var calcCellFromRowAndCol = function(row, col) {
-		return (row - 1) * _opt.rows + col
+		return (row - 1) * _opt.columns + col;
 	};
 
 
@@ -756,7 +756,7 @@ var game = function(_opt) {
 			nextSide = nextCellSide(side),
 			thisCell = calcRowAndCol(cell),
 			nextCellId,
-			tot = _opt.rows * _opt.columns;;
+			tot = _opt.rows * _opt.columns;
 
 		row = thisCell.r + nextSide.r;
 		col = thisCell.c + nextSide.c;
