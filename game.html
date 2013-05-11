@@ -9,15 +9,20 @@
 	   -moz-box-sizing: border-box;
 	        box-sizing: border-box;
 }
+body {
+	margin: 0;
+}
 .game {
-	/*background: #CCC;*/
-	/*border: 1px solid #000;*/
+	border: 1px solid #000;
 	display: inline-block;
-	margin: 10px;
+	margin: 0;
 	position: relative;
 	/* http://stackoverflow.com/questions/3779534/how-to-disable-text-selection-with-css-or-js */
 	-webkit-user-select: none;
 	   -moz-user-select: none;
+}
+#game {
+	display: block;
 }
 .game-clone {
 	left: 0;
@@ -32,10 +37,14 @@
 .game-wrapper * {
 	font-size: 1rem;
 }
+.layer-bg {
+	background: #AAA;
+}
 .side {
 	border: 1px solid #000;
 	padding: 5px;
 	text-align: center;
+	display: none !important;
 }
 .north, .south {
 	display: block;
