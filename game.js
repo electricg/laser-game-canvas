@@ -115,30 +115,31 @@ var game = function(_opt) {
 	}
 
 
-	console.log(document.documentElement.clientWidth);
-	console.log(document.documentElement.clientHeight);
 	var _docWidth = document.documentElement.clientWidth,
 		_docHeight = document.documentElement.clientHeight,
-		_canvasWidth,
-		_canvasHeight;
+		_canvasW,
+		_canvasH;
 
-	_canvasWidth = _docHeight * _opt.columns / _opt.rows;
+	_canvasW = _docHeight * _opt.columns / _opt.rows;
 	
-	if (_canvasWidth <= _docWidth) {
-		_canvasHeight = _docHeight;
+	if (_canvasW <= _docWidth) {
+		_canvasH = _docHeight;
 	}
 	else {
-		_canvasHeight = _docWidth * _opt.rows / _opt.columns;
-		_canvasWidth = _docWidth;
+		_canvasH = _docWidth * _opt.rows / _opt.columns;
+		_canvasW = _docWidth;
 	}
-	console.log(_canvasWidth);
-	console.log(_canvasHeight);
+	// console.log(_docWidth);
+	// console.log(_docHeight);
+	// console.log(_canvasW);
+	// console.log(_canvasH);
+
+	canvas.setAttribute('height', _canvasH);
+	canvas.setAttribute('width', _canvasW);
 
 
 
 	var _ctx = canvas.getContext('2d'),
-		_canvasW = canvas.width,
-		_canvasH = canvas.height,
 		_cellW = _canvasW / _opt.columns,
 		_cellW_2 = _cellW / 2,
 		_cellH = _canvasH / _opt.rows,
