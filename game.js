@@ -1,32 +1,3 @@
-DEBUG = false;
-var GAME_OPTS = {
-	canvasId : 'game',
-	canvasClass : 'game-clone layer-'
-};
-var ALPHA = 1;
-if (DEBUG === true) {
-	ALPHA = 0.5;
-}
-var COLORS = {
-	laser : '#F00',
-	grid : '#FF0',
-	text : '#000',
-	stroke : '#000',
-
-	none : 'transparent',
-	empty : rgba('#CCC', ALPHA),
-	mirror : rgba('#FFF', ALPHA),
-	blackhole : rgba('#444', ALPHA),
-	glass : rgba('#F90', ALPHA),
-	prism : rgba('#FF0', ALPHA),
-	mirror_stuck : rgba('#0F0', ALPHA),
-	blackhole_stuck : rgba('#0FF', ALPHA)
-};
-var LAYOUT = {
-	padding : 10, // px padding
-	line : 1
-};
-
 /**
  * Cell types
  * == empty:
@@ -46,65 +17,6 @@ var LAYOUT = {
  * == blackhole_stuck:
  * same as blackhole, but without the possibility to move the cell.
  */
-
-// example of level configuration
-var levelConfig = {
-	rows : 12,
-	columns : 8,
-	lasers : [
-		{
-			cell : 66,
-			side : 's',
-			dir : 'ne'
-		},
-		{
-			cell : 95,
-			side : 'n',
-			dir : 'nw'
-		}
-	],
-	targets : [
-		{
-			cell : 41,
-			side : 'e'
-		},
-		{
-			cell : 89,
-			side : 's'
-		},
-		{
-			cell : 66,
-			side : 's'
-		}
-	],
-	none : [1],	//set apart because it's drawn on a different layer
-	cells : [
-		{
-			type : 'mirror',
-			arr : [30, 56, 63, 79]
-		},
-		{
-			type : 'blackhole',
-			arr : [6]
-		},
-		{
-			type : 'glass',
-			arr : [2]
-		},
-		{
-			type : 'prism',
-			arr : [3]
-		},
-		{
-			type : 'mirror_stuck',
-			arr : [4]
-		},
-		{
-			type : 'blackhole_stuck',
-			arr : [5]
-		}
-	]
-};
 
 
 
