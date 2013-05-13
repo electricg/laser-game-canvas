@@ -152,9 +152,8 @@ var game = function(_opt) {
 		_points = [],
 		_lasersCounter = 0,
 		_targetRadius = _cellW / 8,
-		_targets = [];
-
-
+		_targets = [],
+		_victory = [];
 
 	/**
 	 * Layers:
@@ -187,8 +186,10 @@ var game = function(_opt) {
 		calcCells();
 		initCells();
 		initTargets();
+		initVictory();
 		drawStuff();
 		initLasers();
+		checkVictory();
 		canvas.onmousedown = click;
 		// console.log(_cells);
 	};
@@ -249,6 +250,29 @@ var game = function(_opt) {
 			_targets.push(target.x + '_' + target.y);
 		}
 		// console.log(_targets);
+	};
+
+
+	/**
+	 * Reset victory targets
+	 */
+	var initVictory = function() {
+		_victory = [];
+		for (var i = 0; i < _targets.length; i++) {
+			_victory.push(_targets[i]);
+		}
+	};
+
+
+	/* Score victory point by removing the target from the stack
+	 * @returns {boolean} true if won, false otherwise
+	 */
+	var checkVictory = function() {
+		if (_victory.length === 0) {
+			alert('won');
+			return true;
+		}
+		return false;
 	};
 
 
@@ -653,9 +677,14 @@ var game = function(_opt) {
 			
 			// draw new cell
 			drawCellFromId(_ctxs['cells'], cell);
+
+			initVictory();
 			
 			// update lasers
 			initLasers();
+
+			// check victory
+			checkVictory();
 		}
 		else {
 			// nothing for the moment
@@ -868,13 +897,18 @@ var game = function(_opt) {
 
 
 	/**
-	 * If the point is a target, light it up
+	 * If the point is a target, light it up and sign in score
 	 * @param {number} x - Point x coordinate
 	 * @param {number} y - Point y coordinate
 	 */
 	var checkPoint = function(x, y) {
 		if (isTargetPoint(x, y)) {
 			drawTargetHit(x, y);
+
+			var index = _victory.indexOf(x + '_' + y);
+			if (index != -1) {
+				_victory.splice(index, 1);
+			}
 		}
 	}
 
