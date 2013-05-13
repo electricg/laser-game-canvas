@@ -167,15 +167,18 @@ var game = function(_opt) {
 	 */
 	var _layers = ['bg', 'debug', 'cells', 'laser', 'moving'],
 		_canvases = [],
-		_ctxs = [];
+		_ctxs = []
+		_canvasParent = canvas.parentNode;
 	for (var i = 0; i < _layers.length; i++) {
-		_canvases[_layers[i]] = document.createElement('canvas');
-		canvas.parentNode.appendChild(_canvases[_layers[i]]);
-		_canvases[_layers[i]].className = GAME_OPTS.canvasClass + _layers[i];
-		_canvases[_layers[i]].setAttribute('height', canvas.height);
-		_canvases[_layers[i]].setAttribute('width', canvas.width);
-		_ctxs[_layers[i]] = _canvases[_layers[i]].getContext('2d');
+		var li = _layers[i];
+		_canvases[li] = document.createElement('canvas');
+		_canvasParent.appendChild(_canvases[li]);
+		_canvases[li].className = GAME_OPTS.canvasClass + li;
+		_canvases[li].setAttribute('height', _canvasH);
+		_canvases[li].setAttribute('width', _canvasW);
+		_ctxs[li] = _canvases[li].getContext('2d');
 	}
+
 
 	/**
 	 * Initiate the game
