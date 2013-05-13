@@ -114,7 +114,6 @@ var game = function(_opt) {
 		return false;
 	}
 
-
 	var _docWidth = document.documentElement.clientWidth,
 		_docHeight = document.documentElement.clientHeight,
 		_canvasW,
@@ -137,15 +136,12 @@ var game = function(_opt) {
 	canvas.setAttribute('height', _canvasH);
 	canvas.setAttribute('width', _canvasW);
 
-
-
 	var _ctx = canvas.getContext('2d'),
 		_cellW = _canvasW / _opt.columns,
 		_cellW_2 = _cellW / 2,
 		_cellH = _canvasH / _opt.rows,
 		_cellH_2 = _cellH / 2,
-		_cellR = _cellW / 4,
-		_padding_2 = LAYOUT.padding / 2,
+		_cellR = _cellW / 4, // radius of cell corners
 		_cells = [{}], // first item empty
 		_cellsLength = _opt.rows * _opt.columns,
 		_movingCell = null,
