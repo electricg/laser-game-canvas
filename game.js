@@ -60,6 +60,7 @@ var game = function(_opt) {
 		_points = [],
 		_lasersCounter = 0,
 		_targetRadius = _cellW / 8,
+		_starterRadius = _cellW / 16,
 		_targets = [],
 		_victory = [];
 
@@ -219,6 +220,9 @@ var game = function(_opt) {
 		for (var i = 0; i < n.length; i++) {
 			_lasersCounter++;
 			var t = calcCoordinate(n[i].cell, n[i].side);
+
+			// draw starter point
+			drawStarter(t.x, t.y);
 			
 			// save point
 			savePoint(t.x, t.y, n[i].dir, i);
@@ -440,6 +444,16 @@ var game = function(_opt) {
 	var drawTarget = function(ctx, cell, side, bg) {
 		var target = calcCoordinate(cell, side);
 		drawCircle(ctx, target.x, target.y, _targetRadius, bg)
+	};
+
+
+	/**
+	 * Draw laser starter point
+	 * @param {number} x - Starter point x coordinate
+	 * @param {number} y - Starter point y coordinate
+	 */
+	var drawStarter = function(x, y) {
+		drawCircle(_ctxs['laser'], x, y, _starterRadius, COLORS['laser']);
 	};
 
 
