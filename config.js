@@ -11,10 +11,11 @@ var COLORS = {
 	laser : '#F00',
 	grid : '#FF0',
 	text : '#000',
-	stroke : '#000',
+	stroke : '#333',
+	empty_stroke : '#DDD',
 
 	none : 'transparent',
-	empty : rgba('#CCC', ALPHA),
+	empty : rgba('#BBB', ALPHA),
 	mirror : rgba('#FFF', ALPHA),
 	blackhole : rgba('#444', ALPHA),
 	glass : rgba('#F90', ALPHA),
@@ -24,5 +25,6 @@ var COLORS = {
 };
 var LAYOUT = {
 	padding : 10, // px padding
-	line : 1
+	line : 2,
+	empty_line : 1
 };

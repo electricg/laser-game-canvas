@@ -295,6 +295,52 @@ var game = function(_opt) {
 	};
 
 
+	var drawCellEmpty = function(cell) {
+		var ctx = _ctxs['bg'],
+			c = _cells[cell],
+			d = _cellW / 10,
+			x = c.x + d,
+			y = c.y + d,
+			w = _cellW - d * 2,
+			h = _cellH - d * 2,
+			r = _cellR - d / 2;
+
+		ctx.lineWidth = LAYOUT.empty_line;
+		ctx.fillStyle = COLORS['empty'];
+		ctx.strokeStyle = COLORS['empty_stroke'];
+		drawRoundRect(ctx, x, y, w, h, r);
+		ctx.fill();
+		ctx.stroke();
+
+		// var a_x = h_x = 				x + r,
+		// 	a_y = b_y = c_y = n_y = 	y,
+		// 	b_x = g_x = 				x + w - r,
+		// 	c_x = d_x = e_x = f_x = 	x + w,
+		// 	d_y = m_y = 				y + r,
+		// 	e_y = l_y = 				y + h - r,
+		// 	f_y = g_y = h_y = i_y = 	y + h,
+		// 	i_x = l_x = m_x = n_x = 	x;
+
+		// ctx.strokeStyle = '#ddd';
+		// ctx.beginPath();
+		// ctx.moveTo(d_x, d_y);
+		// ctx.lineTo(e_x, e_y);
+		// ctx.arcTo(f_x, f_y, g_x, g_y, r);
+		// ctx.lineTo(h_x, h_y);
+		// ctx.arcTo(i_x, i_y, l_x, l_y, r);
+		// ctx.stroke();
+		
+		// ctx.strokeStyle = '#bbb';
+		// ctx.beginPath();
+		// ctx.moveTo(l_x, l_y);
+		// ctx.lineTo(m_x, m_y);
+		// ctx.arcTo(n_x, n_y, a_x, a_y, r);
+		// ctx.lineTo(b_x, b_y);
+		// ctx.arcTo(c_x, c_y, d_x, d_y, r);
+		// ctx.stroke();
+	};
+
+
 	/**
 	 * Draw rounded rectangle
 	 * @param {object} ctx - Canvas context to work on
@@ -444,7 +490,8 @@ var game = function(_opt) {
 		for (var i = 1; i <= _cellsLength; i++) {
 			// check that is not none
 			if (_cells[i].type != 'none') {
-				drawCellFromType(_ctxs['bg'], i, 'empty');
+				//drawCellFromType(_ctxs['bg'], i, 'empty');
+				drawCellEmpty(i);
 			}
 		}
 	};
