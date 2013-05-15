@@ -26,5 +26,7 @@ var COLORS = {
 var LAYOUT = {
 	padding : 10, // px padding
 	line : 2,
-	empty_line : 1
+	empty_line : 1,
+	maxWidth : document.documentElement.clientWidth,
+	maxHeight : document.documentElement.clientHeight
 };

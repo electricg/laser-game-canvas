@@ -26,8 +26,8 @@ var game = function(_opt) {
 		return false;
 	}
 
-	var _docWidth = document.documentElement.clientWidth,
-		_docHeight = document.documentElement.clientHeight,
+	var _docWidth = LAYOUT.maxWidth,
+		_docHeight = LAYOUT.maxHeight,
 		_canvasW,
 		_canvasH,
 		_cellW,
