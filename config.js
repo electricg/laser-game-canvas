@@ -20,8 +20,8 @@ var COLORS = {
 	blackhole : rgba('#444', ALPHA),
 	glass : rgba('#FFF', ALPHA),
 	prism : rgba('#FF0', ALPHA),
-	mirror_stuck : rgba('#0F0', ALPHA),
-	blackhole_stuck : rgba('#0FF', ALPHA)
+	mirror_stuck : rgba('#FFF', ALPHA),
+	blackhole_stuck : rgba('#444', ALPHA)
 };
 var LAYOUT = {
 	padding : 10, // px padding
