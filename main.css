@@ -1,0 +1,37 @@
+*, *:after, *:before {
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+body {
+	background: #222;
+	margin: 0;
+}
+.game-wrapper {
+	font-size: 0;
+	text-align: center;
+}
+.game {
+	display: inline-block;
+	margin: 0;
+	position: relative;
+	/* http://stackoverflow.com/questions/3779534/how-to-disable-text-selection-with-css-or-js */
+	-webkit-user-select: none;
+	   -moz-user-select: none;
+}
+#game {
+	display: block;
+}
+.game-clone {
+	left: 0;
+	position: absolute;
+	top: 0;
+	z-index: -1;
+}
+.layer-bg {
+	background: #AAA;
+}
+
+.header {
+	
+}
