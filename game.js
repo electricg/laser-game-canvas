@@ -29,7 +29,9 @@ var game = function(_opt) {
 	var _docWidth = document.documentElement.clientWidth,
 		_docHeight = document.documentElement.clientHeight,
 		_canvasW,
-		_canvasH;
+		_canvasH,
+		_cellW,
+		_cellH;
 
 	_canvasW = _docHeight * _opt.columns / _opt.rows;
 	
@@ -40,18 +42,22 @@ var game = function(_opt) {
 		_canvasH = _docWidth * _opt.rows / _opt.columns;
 		_canvasW = _docWidth;
 	}
-	// console.log(_docWidth);
-	// console.log(_docHeight);
-	// console.log(_canvasW);
-	// console.log(_canvasH);
+
+	_cellW = Math.floor(_canvasW / _opt.columns);
+
+	if (isEven(_cellW)) {
+		_cellW = _cellW - 1;
+	}
+
+	_cellH = _cellW;
+	_canvasW = _cellW * _opt.columns;
+	_canvasH = _cellH * _opt.rows;
 
 	canvas.setAttribute('height', _canvasH);
 	canvas.setAttribute('width', _canvasW);
 
 	var _ctx = canvas.getContext('2d'),
-		_cellW = _canvasW / _opt.columns,
 		_cellW_2 = _cellW / 2,
-		_cellH = _canvasH / _opt.rows,
 		_cellH_2 = _cellH / 2,
 		_cellR = _cellW / 4, // radius of cell corners
 		_cells = [{}], // first item empty
@@ -63,6 +69,11 @@ var game = function(_opt) {
 		_starterRadius = _cellW / 16,
 		_targets = [],
 		_victory = [];
+
+	// console.log(_docWidth, _docHeight);
+	// console.log(_canvasW, _canvasH);
+	// console.log(_cellW, _cellH);
+	// console.log(_cellW_2, _cellH_2);
 
 	/**
 	 * Layers:
