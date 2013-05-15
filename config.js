@@ -1,6 +1,6 @@
 DEBUG = false;
 var GAME_OPTS = {
-	canvasId : 'game',
+	canvasId : 'game-main',
 	canvasClass : 'game-clone layer-'
 };
 var ALPHA = 1;

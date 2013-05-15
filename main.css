@@ -19,7 +19,7 @@ body {
 	-webkit-user-select: none;
 	   -moz-user-select: none;
 }
-#game {
+canvas {
 	display: block;
 }
 .game-clone {
