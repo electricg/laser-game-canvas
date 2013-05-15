@@ -1,0 +1,70 @@
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  background: #999;
+  color: #FFF;
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+
+.game-wrapper {
+  font-size: 0;
+  text-align: center;
+}
+
+.game {
+  display: inline-block;
+  margin: 0;
+  position: relative;
+  /* http://stackoverflow.com/questions/3779534/how-to-disable-text-selection-with-css-or-js */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}
+
+canvas {
+  display: block;
+}
+
+.game-clone {
+  left: 0;
+  position: absolute;
+  top: 0;
+  z-index: -1;
+}
+
+.layer-bg {
+  background: #AAA;
+}
+
+.header {
+  background: #000;
+  border-bottom: 1px solid #CCC;
+  font-size: 0;
+}
+.header ul {
+  padding: 0;
+  text-align: center;
+}
+.header li {
+  display: inline-block;
+  width: 15%;
+}
+.header a {
+  color: #FFF;
+  display: block;
+  font-size: 1rem;
+  padding: 1em 0;
+  text-decoration: none;
+}
+.header a:hover, .header a:focus, .header a:active {
+  background: #444;
+}
+.header i {
+  padding-right: 0.5em;
+}
+
+/*@ sourceMappingURL=style.debug.css.map */

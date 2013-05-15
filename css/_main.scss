@@ -4,7 +4,9 @@
 	        box-sizing: border-box;
 }
 body {
-	background: #222;
+	background: #999;
+	color: #FFF;
+	font-family: Arial, sans-serif;
 	margin: 0;
 }
 .game-wrapper {
@@ -32,6 +34,32 @@ canvas {
 	background: #AAA;
 }
 
+
 .header {
-	
+	background: #000;
+	border-bottom: 1px solid #CCC;
+	font-size: 0;
+
+	ul {
+		padding: 0;
+		text-align: center;
+	}
+	li {
+		display: inline-block;
+		width: 15%;
+	}
+	a {
+		color: #FFF;
+		display: block;
+		font-size: 1rem;
+		padding: 1em 0;
+		text-decoration: none;
+
+		&:hover, &:focus, &:active {
+			background: #444;
+		}
+	}
+	i {
+		padding-right: 0.5em;
+	}
 }
