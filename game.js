@@ -67,6 +67,8 @@ var game = function(_opt) {
 		_lasersCounter = 0,
 		_targetRadius = _cellW / 8,
 		_starterRadius = _cellW / 16,
+		_screwRadius = _cellW / 12,
+		_screwDistance = _cellW / 5,
 		_targets = [],
 		_victory = [];
 
@@ -286,6 +288,10 @@ var game = function(_opt) {
 		drawRoundRect(ctx, x, y, _cellW, _cellH, _cellR);
 		ctx.fill();
 		ctx.stroke();
+
+		if (type.indexOf('stuck') != -1) {
+			drawScrews(ctx, x, y);
+		}
 	};
 
 
@@ -352,6 +358,39 @@ var game = function(_opt) {
 		ctx.stroke();
 		ctx.closePath();
 	};
+
+
+	/**
+	 * Draw screw
+	 * @param {object} ctx - Canvas context to work on
+	 * @param {number} x - Screw center point x coordinate
+	 * @param {number} y - Screw center point y coordinate
+	 * @param {number} r - Screw radius
+	 */
+	var drawScrew = function(ctx, x, y, r) {
+		var r_2 = r / 2;
+		ctx.strokeStyle = COLORS['empty_stroke'];
+		drawCircle(ctx, x, y, r, COLORS['empty']);
+		// ctx.stroke();
+		drawLine(ctx, x-r_2, y-r_2, x+r_2, y+r_2);
+		drawLine(ctx, x+r_2, y-r_2, x-r_2, y+r_2);
+	};
+
+
+	/**
+	 * Draw screws inside cell
+	 * @param {object} ctx - Canvas context to work on
+	 * @param {number} x - Cell x coordinate
+	 * @param {number} y - Cell y coordinate
+	 */
+	var drawScrews = function(ctx, x, y) {
+		var r = _screwRadius,
+			d = _screwDistance;
+		drawScrew(ctx, x + d, y + d, r);
+		drawScrew(ctx, x +_cellW - d, y + d, r);
+		drawScrew(ctx, x + d, y + _cellH - d, r);
+		drawScrew(ctx, x + _cellW - d, y + _cellH - d, r);
+	}
 
 
 	/**
