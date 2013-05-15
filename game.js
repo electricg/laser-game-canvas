@@ -283,7 +283,7 @@ var game = function(_opt) {
 	var drawCell = function(ctx, x, y, type) {
 		ctx.lineWidth = LAYOUT.line;
 		ctx.fillStyle = COLORS[type];
-		ctx.strokeStyle = COLORS['stroke'];
+		ctx.strokeStyle = COLORS.stroke;
 		// ctx.fillRect(x, y, _cellW, _cellH);
 		drawRoundRect(ctx, x, y, _cellW, _cellH, _cellR);
 		ctx.fill();
@@ -363,6 +363,11 @@ var game = function(_opt) {
 	 * @param {number} r - Border radius
 	 */
 	var drawRoundRect = function(ctx, x, y, w, h, r) {
+		x = x + 1;
+		y = y + 1;
+		w = w - 2;
+		h = h - 2;
+		r = r - 1;
 		var a_x = h_x = 				x + r,
 			a_y = b_y = c_y = n_y = 	y,
 			b_x = g_x = 				x + w - r,
@@ -382,6 +387,9 @@ var game = function(_opt) {
 		ctx.arcTo(i_x, i_y, l_x, l_y, r);
 		ctx.lineTo(m_x, m_y);
 		ctx.arcTo(n_x, n_y, a_x, a_y, r);
+
+		// ctx.beginPath();
+		// ctx.rect(x, y, w, h);
 	};
 
 
