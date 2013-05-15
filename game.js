@@ -292,6 +292,18 @@ var game = function(_opt) {
 		if (type.indexOf('stuck') != -1) {
 			drawScrews(ctx, x, y);
 		}
+
+		if (type === 'glass') {
+			var d = _cellW / 10;
+			ctx.fillStyle = COLORS['blackhole'];
+			drawRoundRect(ctx, x+1, y+1, _cellW-d, _cellH-d, _cellR-2);
+			ctx.fill();
+
+			ctx.fillStyle = COLORS['empty'];
+			drawRoundRect(ctx, x+d-2, y+d-2, _cellW-d*2+3, _cellH-d*2+3, _cellR-d);
+			ctx.fill();
+			drawCircle(ctx, x + _screwDistance, y + _screwDistance, _screwRadius, COLORS[type]);
+		}
 	};
 
 
