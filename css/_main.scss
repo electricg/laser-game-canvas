@@ -55,11 +55,44 @@ canvas {
 		padding: 1em 0;
 		text-decoration: none;
 
-		&:hover, &:focus, &:active {
+		&:hover, &:focus, &:active, &.selected {
 			background: #444;
 		}
 	}
 	i {
 		padding-right: 0.5em;
 	}
+}
+
+/* Overlay */
+.main {
+	position: relative;
+
+	&:after {
+		background: rgba(#000, 0.7);
+		bottom: 0;
+		content: "";
+		display: none;
+		left: 0;
+		padding: 2em;
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+}
+.menu-content {
+	bottom: 0;
+	display: none;
+	left: 0;
+	height: 100%;
+	overflow: auto;
+	padding: 2em;
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: 2;
+}
+.overlay-show,
+.main.overlay-show:after {
+	display: block;
 }

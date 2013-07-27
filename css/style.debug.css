@@ -129,11 +129,45 @@ canvas {
   padding: 1em 0;
   text-decoration: none;
 }
-.header a:hover, .header a:focus, .header a:active {
+.header a:hover, .header a:focus, .header a:active, .header a.selected {
   background: #444;
 }
 .header i {
   padding-right: 0.5em;
 }
 
-/*@ sourceMappingURL=style.debug.css.map */
+/* Overlay */
+.main {
+  position: relative;
+}
+.main:after {
+  background: rgba(0, 0, 0, 0.7);
+  bottom: 0;
+  content: "";
+  display: none;
+  left: 0;
+  padding: 2em;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.menu-content {
+  bottom: 0;
+  display: none;
+  left: 0;
+  height: 100%;
+  overflow: auto;
+  padding: 2em;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 2;
+}
+
+.overlay-show,
+.main.overlay-show:after {
+  display: block;
+}
+
+/*# sourceMappingURL=style.debug.css.map */

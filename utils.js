@@ -1,3 +1,26 @@
+var $ = document.querySelectorAll.bind(document);
+var $$ = document.querySelector.bind(document);
+Element.prototype.on = Element.prototype.addEventListener;
+
+function hasClass(ele,cls) {
+	if (ele) {
+		return ele.className.match(new RegExp('(\\s|^)'+cls+'(\\s|$)'));
+	}
+}
+function addClass(ele,cls) {
+	if (ele) {
+		if (!hasClass(ele,cls)) ele.className += " "+cls;
+	}
+}
+function removeClass(ele,cls) {
+	if (ele) {
+		if (hasClass(ele,cls)) {
+			var reg = new RegExp('(\\s|^)'+cls+'(\\s|$)');
+			ele.className=ele.className.replace(reg,'');
+		}
+	}
+}
+
 function hexToRgb(hex) {
 	var reg,
 		res,
