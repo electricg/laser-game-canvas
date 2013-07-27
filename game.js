@@ -34,7 +34,7 @@ var game = function(_opt) {
 		_cellH;
 
 	_canvasW = _docHeight * _opt.columns / _opt.rows;
-	
+
 	if (_canvasW <= _docWidth) {
 		_canvasH = _docHeight;
 	}
@@ -236,13 +236,13 @@ var game = function(_opt) {
 
 			// draw starter point
 			drawStarter(t.x, t.y);
-			
+
 			// save point
 			savePoint(t.x, t.y, n[i].dir, i);
 
 			// check if the point is a target
 			checkPoint(t.x, t.y);
-			
+
 			// start drawing laser
 			drawLaser(n[i].cell, n[i].side, n[i].dir, _lasersCounter);
 		}
@@ -341,7 +341,7 @@ var game = function(_opt) {
 		// ctx.lineTo(h_x, h_y);
 		// ctx.arcTo(i_x, i_y, l_x, l_y, r);
 		// ctx.stroke();
-		
+
 		// ctx.strokeStyle = '#bbb';
 		// ctx.beginPath();
 		// ctx.moveTo(l_x, l_y);
@@ -368,14 +368,14 @@ var game = function(_opt) {
 		w = w - 2;
 		h = h - 2;
 		r = r - 1;
-		var a_x = h_x = 				x + r,
-			a_y = b_y = c_y = n_y = 	y,
-			b_x = g_x = 				x + w - r,
-			c_x = d_x = e_x = f_x = 	x + w,
-			d_y = m_y = 				y + r,
-			e_y = l_y = 				y + h - r,
-			f_y = g_y = h_y = i_y = 	y + h,
-			i_x = l_x = m_x = n_x = 	x;
+		var a_x = h_x = x + r,
+			a_y = b_y = c_y = n_y = y,
+			b_x = g_x = x + w - r,
+			c_x = d_x = e_x = f_x = x + w,
+			d_y = m_y = y + r,
+			e_y = l_y = y + h - r,
+			f_y = g_y = h_y = i_y = y + h,
+			i_x = l_x = m_x = n_x = x;
 
 		ctx.beginPath();
 		ctx.moveTo(a_x, a_y);
@@ -456,7 +456,7 @@ var game = function(_opt) {
 		drawScrew(ctx, x +_cellW - d, y + d, r);
 		drawScrew(ctx, x + d, y + _cellH - d, r);
 		drawScrew(ctx, x + _cellW - d, y + _cellH - d, r);
-	}
+	};
 
 
 	/**
@@ -547,7 +547,7 @@ var game = function(_opt) {
 	 * @param {number} y - Target point y coordinate
 	 */
 	var drawTargetHit = function(x, y) {
-		drawCircle(_ctxs['laser'], x, y, _targetRadius, COLORS.laser)
+		drawCircle(_ctxs['laser'], x, y, _targetRadius, COLORS.laser);
 	};
 
 
@@ -560,7 +560,7 @@ var game = function(_opt) {
 	 */
 	var drawTarget = function(ctx, cell, side, bg) {
 		var target = calcCoordinate(cell, side);
-		drawCircle(ctx, target.x, target.y, _targetRadius, bg)
+		drawCircle(ctx, target.x, target.y, _targetRadius, bg);
 	};
 
 
@@ -608,7 +608,7 @@ var game = function(_opt) {
 
 		return res;
 	};
-	
+
 
 	/**
 	 * Return cell id from x,y coordinates
@@ -652,12 +652,12 @@ var game = function(_opt) {
 		else {
 			// clear canvas
 			clearMovingCanvas();
-			
+
 			// draw cell at current mouse point
 			drawCell(_ctxs['moving'], pos.x - _cellW_2, pos.y - _cellH_2, _cells[cell].type);
 
 			_movingCell = cell;
-			
+
 			canvas.onmousemove = updateLayerMoving;
 			canvas.onmouseup = pieceDropped;
 		}
@@ -701,7 +701,7 @@ var game = function(_opt) {
 		canvas.onmousemove = null;
 		canvas.onmouseup = null;
 		clearMovingCanvas();
-		
+
 		var pos = mousePositionElement(),
 			cell = getSelectedCell(pos.x, pos.y);
 
@@ -713,12 +713,12 @@ var game = function(_opt) {
 
 			// delete old cell
 			clearCell(_movingCell);
-			
+
 			// draw new cell
 			drawCellFromId(_ctxs['cells'], cell);
 
 			initVictory();
-			
+
 			// update lasers
 			initLasers();
 
@@ -786,11 +786,11 @@ var game = function(_opt) {
 	 */
 	var calcRowAndCol = function(cell) {
 		var tot = _opt.rows * _opt.columns;
-		
+
 		if (cell <= 0 || cell > tot) {
 			return false;
 		}
-		
+
 		var row = 0,
 			col = 0;
 
@@ -835,13 +835,13 @@ var game = function(_opt) {
 		if (row <= 0 || row > _opt.rows || col <= 0 || col > _opt.columns) {
 			return false;
 		}
-		
+
 		nextCellId = calcCellFromRowAndCol(row, col);
-		
+
 		if (nextCellId <= 0 || nextCellId > tot) {
 			return false;
 		}
-		
+
 		return nextCellId;
 	};
 
@@ -949,7 +949,7 @@ var game = function(_opt) {
 				_victory.splice(index, 1);
 			}
 		}
-	}
+	};
 
 
 	/**
@@ -961,7 +961,7 @@ var game = function(_opt) {
 	 */
 	var drawLaser = function(cell, side, dir, laserId) {
 		var endSide, endDir, endPoint;
-		
+
 		// calc entrance point coordinates
 		var startPoint = calcCoordinate(cell, side);
 
