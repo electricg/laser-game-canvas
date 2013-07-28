@@ -88,7 +88,7 @@ var game = function(_opt) {
 	 */
 	var _layers = ['bg', 'debug', 'cells', 'laser', 'moving'],
 		_canvases = [],
-		_ctxs = []
+		_ctxs = [],
 		_canvasParent = canvas.parentNode;
 	for (var i = 0; i < _layers.length; i++) {
 		var li = _layers[i];
