@@ -112,7 +112,8 @@ var game = function(_opt) {
 		drawStuff();
 		initLasers();
 		checkVictory();
-		canvas.onmousedown = click;
+		canvas.addEventListener('mousedown', click);
+		canvas.addEventListener('touchstart', click);
 		// console.log(_cells);
 	};
 
@@ -658,8 +659,10 @@ var game = function(_opt) {
 
 			_movingCell = cell;
 
-			canvas.onmousemove = updateLayerMoving;
-			canvas.onmouseup = pieceDropped;
+			canvas.addEventListener('mousemove', updateLayerMoving);
+			canvas.addEventListener('touchmove', updateLayerMoving);
+			canvas.addEventListener('mouseup', pieceDropped);
+			canvas.addEventListener('touchend', pieceDropped);
 		}
 	};
 
@@ -698,8 +701,10 @@ var game = function(_opt) {
 	 */
 	var pieceDropped = function() {
 		// console.log('dropped');
-		canvas.onmousemove = null;
-		canvas.onmouseup = null;
+		canvas.removeEventListener('mousemove', updateLayerMoving);
+		canvas.removeEventListener('touchmove', updateLayerMoving);
+		canvas.removeEventListener('mouseup', pieceDropped);
+		canvas.removeEventListener('touchend', pieceDropped);
 		clearMovingCanvas();
 
 		var pos = mousePositionElement(),

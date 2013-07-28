@@ -17,7 +17,12 @@ function mousePositionDocument(e) {
 	if (!e) {
 		var e = window.event;
 	}
-	if (e.pageX || e.pageY) {
+	if (e.changedTouches) {
+		var touches = e.changedTouches;
+		posx = touches[0].pageX;
+		posy = touches[0].pageY;
+	}
+	else if (e.pageX || e.pageY) {
 		posx = e.pageX;
 		posy = e.pageY;
 	}
