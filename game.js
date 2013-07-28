@@ -112,8 +112,8 @@ var game = function(_opt) {
 		drawStuff();
 		initLasers();
 		checkVictory();
-		canvas.addEventListener('mousedown', click);
-		canvas.addEventListener('touchstart', click);
+		canvas.on('mousedown', click);
+		canvas.on('touchstart', click);
 		// console.log(_cells);
 	};
 
@@ -659,10 +659,10 @@ var game = function(_opt) {
 
 			_movingCell = cell;
 
-			canvas.addEventListener('mousemove', updateLayerMoving);
-			canvas.addEventListener('touchmove', updateLayerMoving);
-			canvas.addEventListener('mouseup', pieceDropped);
-			canvas.addEventListener('touchend', pieceDropped);
+			canvas.on('mousemove', updateLayerMoving);
+			canvas.on('touchmove', updateLayerMoving);
+			canvas.on('mouseup', pieceDropped);
+			canvas.on('touchend', pieceDropped);
 		}
 	};
 
