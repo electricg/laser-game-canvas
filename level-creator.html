@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Level creator</title>
+	<meta name="description" content="">
+	<style>
+body {
+	color: #444;
+	font-family: sans-serif;
+	font-size: 12px
+}
+fieldset {
+	border: 1px solid #CCC;
+	margin: 0.8em 0;
+}
+legend {
+	font-weight: bold;
+}
+div:first-of-type .target_del,
+	div:first-of-type .laser_del{
+	display: none;
+}
+.target_add,
+.laser_add {
+	display: none;
+}
+div:first-of-type .target_add,
+div:first-of-type .laser_add{
+	display: inline;
+}
+[type=number] {
+	width: 3em;
+}
+	</style>
+</head>
+<body>
+<form action="">
+	<fieldset>
+		<legend>Level</legend>
+
+		<label>L1: <input type="number" id="l1" min="1" value="1"></label>
+		<label>L2: <input type="number" id="l2" min="1" value="1"></label>
+	</fieldset>
+
+	<fieldset>
+		<legend>Layout</legend>
+		
+		<label>Rows: <input type="number" id="rows" min="1" value="1"></label>
+		<label>Columns: <input type="number" id="columns" min="1" value="1"></label>
+	</fieldset>
+
+	<fieldset>
+		<legend>Lasers</legend>
+
+		<div class="lasers">
+			<label>Cell: <input type="number" class="lasers_cell" min="1" value="1"></label>
+
+			<label>Side:
+				<select class="lasers_side">
+					<option value="n">North &#8593;</option>
+					<option value="e">East &#8594;</option>
+					<option value="s">South &#8595;</option>
+					<option value="w">West &#8592;</option>
+				</select>
+			</label>
+
+			<label>Direction:
+				<select class="lasers_dir">
+					<option value="ne">North-East &#8599;</option>
+					<option value="se">South-East &#8600;</option>
+					<option value="sw">South-West &#8601;</option>
+					<option value="nw">North-West &#8598;</option>
+				</select>
+			</label>
+
+			<input type="button" class="laser_add" value="+">
+			<input type="button" class="laser_del" value="-">
+		</div>
+	</fieldset>
+
+	<fieldset>
+		<legend>Targets</legend>
+
+		<div class="targets">
+			<label>Cell: <input type="number" class="targets_cell" min="1" value="1"></label>
+
+			<label>Side:
+				<select class="targets_side">
+					<option value="n">North &#8593;</option>
+					<option value="e">East &#8594;</option>
+					<option value="s">South &#8595;</option>
+					<option value="w">West &#8592;</option>
+				</select>
+			</label>
+
+			<input type="button" class="target_add" value="+">
+			<input type="button" class="target_del" value="-">
+		</div>
+	</fieldset>
+
+	<fieldset>
+		<legend>Cells</legend>
+		<span>Values separated by comma.</span>
+
+		<div>
+			<label>None: <input type="text" id="none"></label>
+		</div>
+		<div>
+			<label>Mirror: <input type="text" class="cells_mirror"></label>
+		</div>
+		<div>
+			<label>Blackhole: <input type="text" class="cells_blackhole"></label>
+		</div>
+		<div>
+			<label>Glass: <input type="text" class="cells_glass"></label>
+		</div>
+		<div>
+			<label>Prism: <input type="text" class="cells_prism"></label>
+		</div>
+		<div>
+			<label>Mirror stuck: <input type="text" class="cells_mirror_stuck"></label>
+		</div>
+		<div>
+			<label>Blackhole stuck: <input type="text" class="cells_blackhole_stuck"></label>
+		</div>
+	</fieldset>
+
+	<fieldset>
+		<legend>Solution</legend>
+		<span>Values separated by comma.</span>
+
+		<div>
+			<label>Mirror: <input type="text" class="solution_mirror"></label>
+		</div>
+		<div>
+			<label>Blackhole: <input type="text" class="solution_blackhole"></label>
+		</div>
+		<div>
+			<label>Glass: <input type="text" class="solution_glass"></label>
+		</div>
+		<div>
+			<label>Prism: <input type="text" class="solution_prism"></label>
+		</div>
+		<div>
+			<label>Mirror stuck: <input type="text" class="solution_mirror_stuck"></label>
+		</div>
+		<div>
+			<label>Blackhole stuck: <input type="text" class="solution_blackhole_stuck"></label>
+		</div>
+	</fieldset>
+	<input type="button" id="create" value="create">
+</form>
+<script src="../lib/js/jquery-1.8.3.min.js"></script>
+<script>
+var emtpy_level = {
+	rows : 0, columns : 0,
+	lasers : [
+		{ cell : 0, side : '', dir : '' }
+	],
+	targets : [
+		{ cell : 0, side : '' }
+	],
+	none : [],
+	cells : [
+		{ type : 'mirror', arr : [] },
+		{ type : 'blackhole', arr : [] },
+		{ type : 'glass', arr : [] },
+		{ type : 'prism', arr : [] },
+		{ type : 'mirror_stuck', arr : [] },
+		{ type : 'blackhole_stuck', arr : [] }
+	],
+	l1: 0,
+	l2: 0,
+	solution: [
+		{ type : 'mirror', arr : [] },
+		{ type : 'blackhole', arr : [] },
+		{ type : 'glass', arr : [] },
+		{ type : 'prism', arr : [] },
+		{ type : 'mirror_stuck', arr : [] },
+		{ type : 'blackhole_stuck', arr : [] }
+	]
+};
+
+var levels = [];
+if (typeof localStorage['levels'] === 'string') {
+	levels = JSON.parse(localStorage['levels']);
+}
+
+$(document).ready(function(){
+	$('.laser_add, .target_add').live('click', function() {
+		var $this = $(this),
+			$parent = $this.parent();
+
+		$parent.parent().append( $parent.clone() );
+	});
+	$('.laser_del, .target_del').live('click', function() {
+		var $this = $(this),
+			parent = $this.parent();
+
+		$parent.remove();
+	});
+
+	$('#create').live('click', function() {
+		var o = {};
+		var ids = ['l1', 'l2', 'rows', 'columns'],
+			none = 'none',
+			classes = ['lasers', 'targets'],
+			arrs = ['cells', 'solution'];
+
+		for (var i = 0; i < ids.length; i++) {
+			var $t = $('#' + ids[i]);
+			var v = $t.val();
+			if ($t.attr('type') === 'number') {
+				v = v * 1;
+			}
+			o[ids[i]] = v;
+		}
+
+		var $none = $('#' + none);
+		var v = $none.val();
+			if (v !== '') {
+				v = v.split(',');
+				for (var m = 0; m < v.length; m++) {
+					v[m] = v[m] * 1;
+				}
+			}
+			else {
+				v = [];
+			}
+			o[none] = v;
+
+		for (var i = 0; i < classes.length; i++) {
+			var $div = $('.' + classes[i]);
+			o[classes[i]] = [];
+			if ($div.length) {
+				$div.each(function() {
+					var $d = $(this);
+					var $el = $d.find('[class^=' + classes[i] + '_]');
+					var _o = {};
+					$el.each(function() {
+						var $this = $(this);
+						var c = $this.attr('class').replace(classes[i] + '_', '');
+						var v = $this.val();
+						if ($this.attr('type') === 'number') {
+							v = v * 1;
+						}
+						_o[c] = v;
+					});
+					o[classes[i]].push(_o);
+				});
+			}
+		}
+
+		for (var i = 0; i < arrs.length; i++) {
+			var $el = $('[class^=' + arrs[i] + '_]');
+			o[arrs[i]] = [];
+			if ($el.length) {
+				$el.each(function() {
+					var $this = $(this);
+					var c = $this.attr('class').replace(arrs[i] + '_', '');
+					var v = $this.val();
+					if (v !== '') {
+						v = v.split(',');
+						for (var m = 0; m < v.length; m++) {
+							v[m] = v[m] * 1;
+						}
+					}
+					else {
+						v = [];
+					}
+					o[arrs[i]].push({type: c, arr: v});
+				});
+			}
+		}
+
+		if (typeof levels[o.l1 - 1] === 'undefined') {
+			levels[o.l1 - 1] = [];
+		}
+		levels[o.l1 - 1][o.l2 - 1] = o;
+		localStorage['levels'] = JSON.stringify(levels)
+	});
+});
+</script>
+	
+</body>
+</html>
