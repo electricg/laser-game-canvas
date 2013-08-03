@@ -30,3 +30,37 @@ var LAYOUT = {
 	maxWidth : document.documentElement.clientWidth,
 	maxHeight : document.documentElement.clientHeight
 };
+
+/**
+ * Example of level config structure
+ * == side: n, e, s, w
+ * == dir: ne, se, sw, nw
+ */
+/*
+var emtpy_level = {
+	rows : 0, columns : 0,
+	lasers : [
+		{ cell : 0, side : '', dir : '' }
+	],
+	targets : [
+		{ cell : 0, side : '' }
+	],
+	none : [],
+	cells : [
+		{ type : 'mirror', arr : [] },
+		{ type : 'blackhole', arr : [] },
+		{ type : 'glass', arr : [] },
+		{ type : 'prism', arr : [] },
+		{ type : 'mirror_stuck', arr : [] },
+		{ type : 'blackhole_stuck', arr : [] }
+	],
+	solution: [
+		{ type : 'mirror', arr : [] },
+		{ type : 'blackhole', arr : [] },
+		{ type : 'glass', arr : [] },
+		{ type : 'prism', arr : [] },
+		{ type : 'mirror_stuck', arr : [] },
+		{ type : 'blackhole_stuck', arr : [] }
+	]
+};
+*/
