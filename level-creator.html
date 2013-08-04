@@ -21,14 +21,6 @@ div:first-of-type .target_del,
 	div:first-of-type .laser_del{
 	display: none;
 }
-.target_add,
-.laser_add {
-	display: none;
-}
-div:first-of-type .target_add,
-div:first-of-type .laser_add{
-	display: inline;
-}
 [type=number] {
 	width: 3em;
 }
@@ -196,7 +188,7 @@ $(document).ready(function(){
 	});
 	$('.laser_del, .target_del').live('click', function() {
 		var $this = $(this),
-			parent = $this.parent();
+			$parent = $this.parent();
 
 		$parent.remove();
 	});
