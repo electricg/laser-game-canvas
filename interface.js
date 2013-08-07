@@ -9,7 +9,7 @@ var init = function() {
 
 	LAYOUT.maxHeight -= _headerHeight;
 
-	game(levels[0]);
+	game(levels[0][0]);
 
 	// Overlay
 	var $overlayLinks = $('.js-overlay'),
