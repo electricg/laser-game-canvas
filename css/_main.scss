@@ -87,7 +87,7 @@ canvas {
 	left: 0;
 	height: 100%;
 	overflow: auto;
-	padding: 2em;
+	padding: 0.5em;
 	position: absolute;
 	right: 0;
 	top: 0;
@@ -96,4 +96,48 @@ canvas {
 .overlay-show,
 .main.overlay-show:after {
 	display: block;
+}
+
+/* Levels menu */
+.l1, .l2 {
+	display: table;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+.l1 {
+	& > li {
+		display: table-row;
+		padding: 1px 0;
+
+		& > * {
+			padding: 1px 0;
+		}
+	}
+}
+.l1-title {
+	display: table-cell;
+	padding-right: 1em !important;
+	width: 1px;
+	white-space: nowrap;
+}
+.l2 {
+	li {
+		display: table-cell;
+		padding: 0 0 0 1px;
+		width: 10%;
+	}
+	a {
+		background: #FFF;
+		color: #000;
+		display: block;
+		line-height: 3;
+		text-align: center;
+		text-decoration: none;
+
+		&:hover, &:focus, &:active {
+			background: #CCC;
+		}
+	}
 }

@@ -44,6 +44,38 @@ var init = function() {
 			}
 		});
 	}
+
+	// Levels menu
+	var $overlayLevels = $$('#levels'),
+		len = levels.length;
+
+	var $ul = document.createElement('ul');
+	$ul.className = 'l1';
+	$overlayLevels.appendChild($ul);
+
+	for (var m = 0; m < 10; m++) {
+		var $li = document.createElement('li'),
+			$span = document.createElement('span'),
+			$ul2 = document.createElement('ul'),
+			len2 = levels[0].length;
+
+		$ul2.className = 'l2';
+		$span.innerHTML = 'Level ' + (m + 1);
+		$span.className = 'l1-title';
+		$li.appendChild($span);
+		$li.appendChild($ul2);
+		$ul.appendChild($li);
+
+		for (n = 0; n < 10; n++) {
+			var $li2 = document.createElement('li'),
+				$a2 = document.createElement('a');
+
+			$a2.innerHTML = (n + 1);
+			$a2.href = m + '-' + n;
+			$ul2.appendChild($li2);
+			$li2.appendChild($a2);
+		}
+	}
 };
 
 window.onload = init;
