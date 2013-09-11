@@ -1,8 +1,7 @@
 var init = function() {
 	// Prevent scrolling http://www.html5rocks.com/en/mobile/touch/
 	document.body.on('touchmove', function(event) {
-		if (event.preventDefault) { event.preventDefault(); }
-		else { event.returnValue = false; }
+		prev(event);
 	}, false);
 
 	var _headerHeight = document.getElementById('header').offsetHeight;
@@ -22,8 +21,7 @@ var init = function() {
 		$overlayDivs[id] = $$(id);
 
 		$overlayLinks[i].on('click', function(event) {
-			if (event.preventDefault) { event.preventDefault(); }
-			else { event.returnValue = false; }
+			prev(event);
 
 			var id = this.getAttribute('href'),
 				$id = $$(id);

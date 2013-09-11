@@ -76,3 +76,8 @@ function isEven(number) {
 	}
 	return false;
 }
+
+function prev(event) {
+	if (event.preventDefault) { event.preventDefault(); }
+	else { event.returnValue = false; }
+}
