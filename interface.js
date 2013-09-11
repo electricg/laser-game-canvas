@@ -51,11 +51,11 @@ var init = function() {
 	$ul.className = 'l1';
 	$overlayLevels.appendChild($ul);
 
-	for (var m = 0; m < 10; m++) {
+	for (var m = 0; m < len; m++) {
 		var $li = document.createElement('li'),
 			$span = document.createElement('span'),
 			$ul2 = document.createElement('ul'),
-			len2 = levels[0].length;
+			len2 = levels[m].length;
 
 		$ul2.className = 'l2';
 		$span.innerHTML = 'Level ' + (m + 1);
@@ -64,7 +64,7 @@ var init = function() {
 		$li.appendChild($ul2);
 		$ul.appendChild($li);
 
-		for (n = 0; n < 10; n++) {
+		for (n = 0; n < len2; n++) {
 			var $li2 = document.createElement('li'),
 				$a2 = document.createElement('a'),
 				a2Id = 'l' + m + '-' + n;
