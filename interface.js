@@ -66,12 +66,21 @@ var init = function() {
 
 		for (n = 0; n < 10; n++) {
 			var $li2 = document.createElement('li'),
-				$a2 = document.createElement('a');
+				$a2 = document.createElement('a'),
+				a2Id = 'l' + m + '-' + n;
 
 			$a2.innerHTML = (n + 1);
-			$a2.href = m + '-' + n;
+			$a2.id = a2Id;
+			$a2.href = '#' + a2Id;
 			$ul2.appendChild($li2);
 			$li2.appendChild($a2);
+			(function(m, n) {
+				$a2.on('click', function(event) {
+					// prev(event);
+					game(levels[m][n]);
+					$overlayLinks[1].click();
+				});
+			})(m, n);
 		}
 	}
 };

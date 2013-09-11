@@ -139,5 +139,10 @@ canvas {
 		&:hover, &:focus, &:active {
 			background: #CCC;
 		}
+
+		&:target {
+			background: #AAA;
+			color: #FFF;
+		}
 	}
 }
