@@ -90,6 +90,17 @@ var game = function(_opt) {
 		_canvases = [],
 		_ctxs = [],
 		_canvasParent = canvas.parentNode;
+
+	// Remove canvas elements if they already exist
+	if (document.getElementsByTagName('canvas').length > 1) {
+		for (var i = 0; i < _layers.length; i++) {
+			var t = document.getElementsByClassName(GAME_OPTS.canvasClass + _layers[i]);
+			if (t.length > 0) {
+				t[0].parentNode.removeChild(t[0]);
+			}
+		}
+	}
+
 	for (var i = 0; i < _layers.length; i++) {
 		var li = _layers[i];
 		_canvases[li] = document.createElement('canvas');
