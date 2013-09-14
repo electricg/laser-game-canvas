@@ -1,3 +1,4 @@
+var l1 = 0, l2 = 0;
 var init = function() {
 	// Prevent scrolling http://www.html5rocks.com/en/mobile/touch/
 	document.body.on('touchmove', function(event) {
@@ -8,7 +9,9 @@ var init = function() {
 
 	LAYOUT.maxHeight -= _headerHeight;
 
-	game(levels[0][0]);
+	var $title = $$('#title');
+
+	setGame();
 
 	// Overlay
 	var $overlayLinks = $('.js-overlay'),
@@ -75,11 +78,53 @@ var init = function() {
 			(function(m, n) {
 				$a2.on('click', function(event) {
 					// prev(event);
-					game(levels[m][n]);
+					l1 = m;
+					l2 = n;
+					setGame();
 					$overlayLinks[1].click();
 				});
 			})(m, n);
 		}
+	}
+
+	// Prev/next buttons
+	var $navButtons = $('.js-nav-button');
+	for (var m = 0; m < $navButtons.length; m++) {
+		$navButtons[m].on('click', function(event) {
+			prev(event);
+			if (this.id === 'next') {
+				l2++;
+				if (l2 >= levels[l1].length) {
+					l2 = 0;
+					l1++;
+					if (l1 >= levels.length) {
+						l1 = 0;
+					}
+				}
+			}
+			else if (this.id === 'prev') {
+				l2--;
+				if (l2 < 0) {
+					l1--;
+					if (l1 < 0) {
+						l1 = levels.length - 1;
+					}
+					l2 = levels[l1].length - 1;
+				}
+			}
+			setGame();
+		});
+	}
+
+	// Level title
+	function setTitle() {
+		$title.innerHTML = 'L1: ' + (l1 + 1) + ' - L2: ' + (l2 + 1);
+	}
+
+	// Init level
+	function setGame() {
+		game(levels[l1][l2]);
+		setTitle();
 	}
 };
 

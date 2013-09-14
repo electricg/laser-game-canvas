@@ -24,7 +24,7 @@ Instead of a list of all class selectors,
 you can use the generic selector below, but it's slower:
 [class*="icon-"] {
 */
-.icon-cog, .icon-question-sign, .icon-info-sign, .icon-tasks, .icon-remove, .icon-volume-off, .icon-volume-down, .icon-volume-up {
+.icon-cog, .icon-question-sign, .icon-info-sign, .icon-tasks, .icon-remove, .icon-volume-off, .icon-volume-down, .icon-volume-up, .icon-caret-left, .icon-caret-right {
   font-family: 'icons';
   speak: none;
   font-style: normal;
@@ -65,6 +65,14 @@ you can use the generic selector below, but it's slower:
 
 .icon-volume-up:before {
   content: "\e007";
+}
+
+.icon-caret-left:before {
+  content: "\e008";
+}
+
+.icon-caret-right:before {
+  content: "\e009";
 }
 
 *, *:after, *:before {
@@ -126,13 +134,13 @@ canvas {
 }
 .header li {
   display: inline-block;
-  width: 15%;
+  vertical-align: middle;
 }
 .header a {
   color: #FFF;
   display: block;
   font-size: 1rem;
-  padding: 1em 0;
+  padding: 1em 0.5em;
   text-decoration: none;
 }
 .header a:hover, .header a:focus, .header a:active, .header a.selected {
@@ -140,6 +148,28 @@ canvas {
 }
 .header i {
   padding-right: 0.5em;
+}
+.header .level-nav-button {
+  border-radius: 5px;
+  display: inline-block;
+  font-size: 0;
+}
+.header .level-nav-button i {
+  display: inline-block;
+  font-size: 2.5rem;
+  padding: 0 15px;
+}
+.header .level-nav-button.disabled {
+  color: rgba(255, 255, 255, 0.2);
+}
+.header .level-nav-button.disabled:hover, .header .level-nav-button.disabled:focus, .header .level-nav-button.disabled:active {
+  background: transparent;
+}
+
+.level-title {
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 1em 0.5em;
 }
 
 /* Overlay */

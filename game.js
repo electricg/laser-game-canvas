@@ -316,6 +316,10 @@ var game = function(_opt) {
 			ctx.fill();
 			drawCircle(ctx, x + _screwDistance, y + _screwDistance, _screwRadius, COLORS[type]);
 		}
+
+		if (type === 'prism') {
+
+		}
 	};
 
 
