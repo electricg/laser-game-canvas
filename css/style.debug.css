@@ -139,24 +139,27 @@ canvas {
 .header a {
   color: #FFF;
   display: block;
-  font-size: 1rem;
-  padding: 1em 0.5em;
+  font-size: 0;
+  line-height: 1.4;
+  padding: 16px 15px;
   text-decoration: none;
 }
 .header a:hover, .header a:focus, .header a:active, .header a.selected {
   background: #444;
 }
 .header i {
-  padding-right: 0.5em;
+  font-size: 1rem;
+  line-height: inherit;
 }
 .header .level-nav-button {
   border-radius: 5px;
   display: inline-block;
   font-size: 0;
+  padding: 0;
 }
 .header .level-nav-button i {
   display: inline-block;
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   padding: 0 15px;
 }
 .header .level-nav-button.disabled {
@@ -167,9 +170,8 @@ canvas {
 }
 
 .level-title {
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: bold;
-  padding: 1em 0.5em;
 }
 
 /* Overlay */
@@ -211,6 +213,7 @@ canvas {
 .l1-title {
   display: table-cell;
   padding-right: 1em !important;
+  vertical-align: middle;
   width: 1px;
   white-space: nowrap;
 }
@@ -224,12 +227,41 @@ canvas {
   background: #FFF;
   color: #000;
   display: block;
+  font-size: 0.8rem;
   line-height: 3;
+  padding: 0;
   text-align: center;
   text-decoration: none;
 }
 .l2 a:hover, .l2 a:focus, .l2 a:active {
   background: #CCC;
+}
+
+@media (min-width: 320px) {
+  .header .level-nav-button {
+    padding: 1em 0.5em;
+  }
+  .header .level-nav-button i {
+    font-size: 2.5rem;
+  }
+
+  .level-title {
+    font-size: 1rem;
+    padding: 1em 0.5em;
+  }
+}
+@media (min-width: 380px) {
+  .header a {
+    font-size: 1rem;
+    padding: 1em 0.5em;
+  }
+  .header i {
+    padding-right: 0.5em;
+  }
+
+  .l2 a {
+    padding: 0;
+  }
 }
 
 /*# sourceMappingURL=style.debug.css.map */
