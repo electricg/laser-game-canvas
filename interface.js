@@ -77,7 +77,7 @@ var init = function() {
 			$li2.appendChild($a2);
 			(function(m, n) {
 				$a2.on('click', function(event) {
-					// prev(event);
+					prev(event);
 					l1 = m;
 					l2 = n;
 					setGame();

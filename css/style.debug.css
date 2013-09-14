@@ -231,9 +231,5 @@ canvas {
 .l2 a:hover, .l2 a:focus, .l2 a:active {
   background: #CCC;
 }
-.l2 a:target {
-  background: #AAA;
-  color: #FFF;
-}
 
 /*# sourceMappingURL=style.debug.css.map */
