@@ -3,6 +3,9 @@
 	   -moz-box-sizing: border-box;
 	        box-sizing: border-box;
 }
+html, body {
+	height: 100%;
+}
 body {
 	background: #999;
 	color: #FFF;
@@ -66,35 +69,20 @@ canvas {
 }
 
 /* Overlay */
-.main {
-	position: relative;
-
-	&:after {
-		background: rgba(#000, 0.7);
-		bottom: 0;
-		content: "";
-		display: none;
-		left: 0;
-		padding: 2em;
-		position: absolute;
-		right: 0;
-		top: 0;
-	}
-}
 .menu-content {
+	background: rgba(#000, 0.7);
 	bottom: 0;
 	display: none;
+	font-size: 1rem;
 	left: 0;
-	height: 100%;
 	overflow: auto;
 	padding: 0.5em;
 	position: absolute;
 	right: 0;
-	top: 0;
+	top: 3.45rem;
 	z-index: 2;
 }
-.overlay-show,
-.main.overlay-show:after {
+.overlay-show {
 	display: block;
 }
 

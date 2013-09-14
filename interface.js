@@ -29,7 +29,6 @@ var init = function() {
 			if (hasClass(this, s)) {
 				removeClass(this, s);
 				removeClass($id, o);
-				removeClass($main, o);
 			}
 			else {
 				for (var m = 0; m < $overlayLinks.length; m++) {
@@ -38,7 +37,6 @@ var init = function() {
 				}
 				addClass(this, s);
 				addClass($id, o);
-				addClass($main, o);
 			}
 		});
 	}
