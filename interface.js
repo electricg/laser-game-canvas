@@ -11,6 +11,7 @@ var init = function() {
 
 	var $title = $$('#title');
 
+	var game = new LaserGame();
 	setGame();
 
 	// Overlay
@@ -123,7 +124,7 @@ var init = function() {
 
 	// Init level
 	function setGame() {
-		game(levels[l1][l2]);
+		game.init(levels[l1][l2]);
 		setTitle();
 	}
 };

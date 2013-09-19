@@ -20,11 +20,13 @@
 
 
 
-var game = function(_opt) {
+var LaserGame = function() {
 	var canvas = document.getElementById(GAME_OPTS.canvasId);
 	if (!canvas.getContext) {
 		return false;
 	}
+
+	var _opt;
 
 	var _docWidth = LAYOUT.maxWidth,
 		_docHeight = LAYOUT.maxHeight,
@@ -33,49 +35,21 @@ var game = function(_opt) {
 		_cellW,
 		_cellH;
 
-	_canvasW = _docHeight * _opt.columns / _opt.rows;
-
-	if (_canvasW <= _docWidth) {
-		_canvasH = _docHeight;
-	}
-	else {
-		_canvasH = _docWidth * _opt.rows / _opt.columns;
-		_canvasW = _docWidth;
-	}
-
-	_cellW = Math.floor(_canvasW / _opt.columns);
-
-	if (isEven(_cellW)) {
-		_cellW = _cellW - 1;
-	}
-
-	_cellH = _cellW;
-	_canvasW = _cellW * _opt.columns;
-	_canvasH = _cellH * _opt.rows;
-
-	canvas.setAttribute('height', _canvasH);
-	canvas.setAttribute('width', _canvasW);
-
 	var _ctx = canvas.getContext('2d'),
-		_cellW_2 = _cellW / 2,
-		_cellH_2 = _cellH / 2,
-		_cellR = _cellW / 4, // radius of cell corners
-		_cells = [{}], // first item empty
-		_cellsLength = _opt.rows * _opt.columns,
-		_movingCell = null,
-		_points = [],
-		_lasersCounter = 0,
-		_targetRadius = _cellW / 8,
-		_starterRadius = _cellW / 16,
-		_screwRadius = _cellW / 12,
-		_screwDistance = _cellW / 5,
-		_targets = [],
-		_victory = [];
-
-	// console.log(_docWidth, _docHeight);
-	// console.log(_canvasW, _canvasH);
-	// console.log(_cellW, _cellH);
-	// console.log(_cellW_2, _cellH_2);
+		_cellW_2,
+		_cellH_2,
+		_cellR,
+		_cells,
+		_cellsLength,
+		_movingCell,
+		_points,
+		_lasersCounter,
+		_targetRadius,
+		_starterRadius,
+		_screwRadius,
+		_screwDistance,
+		_targets,
+		_victory;
 
 	/**
 	 * Layers:
@@ -87,35 +61,17 @@ var game = function(_opt) {
 	 * touch - captures events and coordinates - it's the main canvas
 	 */
 	var _layers = ['bg', 'debug', 'cells', 'laser', 'moving'],
-		_canvases = [],
-		_ctxs = [],
+		_canvases,
+		_ctxs,
 		_canvasParent = canvas.parentNode;
-
-	// Remove canvas elements if they already exist
-	if (document.getElementsByTagName('canvas').length > 1) {
-		for (var i = 0; i < _layers.length; i++) {
-			var t = document.getElementsByClassName(GAME_OPTS.canvasClass + _layers[i]);
-			if (t.length > 0) {
-				t[0].parentNode.removeChild(t[0]);
-			}
-		}
-	}
-
-	for (var i = 0; i < _layers.length; i++) {
-		var li = _layers[i];
-		_canvases[li] = document.createElement('canvas');
-		_canvasParent.appendChild(_canvases[li]);
-		_canvases[li].className = GAME_OPTS.canvasClass + li;
-		_canvases[li].setAttribute('height', _canvasH);
-		_canvases[li].setAttribute('width', _canvasW);
-		_ctxs[li] = _canvases[li].getContext('2d');
-	}
 
 
 	/**
 	 * Initiate the game
 	 */
-	var init = function() {
+	this.init = function(opt) {
+		_opt = opt;
+		initCanvas();
 		calcCells();
 		initCells();
 		initTargets();
@@ -126,6 +82,70 @@ var game = function(_opt) {
 		canvas.on('mousedown', click);
 		canvas.on('touchstart', click);
 		// console.log(_cells);
+	};
+
+
+	var initCanvas = function() {
+		_canvasW = _docHeight * _opt.columns / _opt.rows;
+
+		if (_canvasW <= _docWidth) {
+			_canvasH = _docHeight;
+		}
+		else {
+			_canvasH = _docWidth * _opt.rows / _opt.columns;
+			_canvasW = _docWidth;
+		}
+
+		_cellW = Math.floor(_canvasW / _opt.columns);
+
+		if (isEven(_cellW)) {
+			_cellW = _cellW - 1;
+		}
+
+		_cellH = _cellW;
+		_canvasW = _cellW * _opt.columns;
+		_canvasH = _cellH * _opt.rows;
+
+		canvas.setAttribute('height', _canvasH);
+		canvas.setAttribute('width', _canvasW);
+
+		_cellW_2 = _cellW / 2;
+		_cellH_2 = _cellH / 2;
+		_cellR = _cellW / 4; // radius of cell corners
+		_cells = [{}]; // first item empty
+		_cellsLength = _opt.rows * _opt.columns;
+		_movingCell = null;
+		_points = [];
+		_lasersCounter = 0;
+		_targetRadius = _cellW / 8;
+		_starterRadius = _cellW / 16;
+		_screwRadius = _cellW / 12;
+		_screwDistance = _cellW / 5;
+		_targets = [];
+		_victory = [];
+
+		_canvases = [];
+		_ctxs = [];
+
+		// Remove canvas elements if they already exist
+		if (document.getElementsByTagName('canvas').length > 1) {
+			for (var i = 0; i < _layers.length; i++) {
+				var t = document.getElementsByClassName(GAME_OPTS.canvasClass + _layers[i]);
+				if (t.length > 0) {
+					t[0].parentNode.removeChild(t[0]);
+				}
+			}
+		}
+
+		for (var i = 0; i < _layers.length; i++) {
+			var li = _layers[i];
+			_canvases[li] = document.createElement('canvas');
+			_canvasParent.appendChild(_canvases[li]);
+			_canvases[li].className = GAME_OPTS.canvasClass + li;
+			_canvases[li].setAttribute('height', _canvasH);
+			_canvases[li].setAttribute('width', _canvasW);
+			_ctxs[li] = _canvases[li].getContext('2d');
+		}
 	};
 
 
@@ -1062,7 +1082,4 @@ var game = function(_opt) {
 		// richiama questa funzione
 		drawLaser(nextCellId, nextCellSide, nextCellDir);
 	};
-
-
-	init();
 };
