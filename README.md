@@ -1,4 +1,4 @@
-# Canvas Laser Game
+# Canvas Laser Game [![Analytics](https://ga-beacon.appspot.com/UA-35209681-4/laser-game-canvas/readme?pixel)](https://github.com/igrigorik/ga-beacon)
 
 This is just a copy of [Lazors](http://pyrosphere.net/lazors/) puzzle game, to learn and improve my knowledge of JavaScript canvas.
 
