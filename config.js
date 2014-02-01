@@ -24,7 +24,6 @@ var COLORS = {
 	blackhole_stuck : rgba('#444', ALPHA)
 };
 var LAYOUT = {
-	padding : 10, // px padding
 	line : 2,
 	empty_line : 1,
 	maxWidth : document.documentElement.clientWidth,
