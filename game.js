@@ -65,6 +65,10 @@ var LaserGame = function() {
 		_ctxs,
 		_canvasParent = canvas.parentNode;
 
+	if (DEBUG === false) {
+		_layers.splice(1, 1);
+	}
+
 
 	/**
 	 * Initiate the game
