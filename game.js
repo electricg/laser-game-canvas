@@ -32,6 +32,7 @@ var LaserGame = function() {
 		_docHeight = LAYOUT.maxHeight,
 		_canvasW,
 		_canvasH,
+		_canvasD,
 		_cellW,
 		_cellH,
 		_startX,
@@ -109,6 +110,7 @@ var LaserGame = function() {
 		_canvasH = _docHeight;
 		_startX = (_canvasW - (_cellW * _opt.columns)) / 2;
 		_startY = (_canvasH - (_cellH * _opt.rows)) / 2;
+		_canvasD = Math.sqrt(Math.pow(_canvasW, 2) + Math.pow(_canvasH, 2));
 
 		canvas.setAttribute('height', _canvasH);
 		canvas.setAttribute('width', _canvasW);
@@ -1079,6 +1081,24 @@ var LaserGame = function() {
 
 		// end if out of the canvas
 		if (nextCellId === false) {
+			var angle = 0;
+			switch(nextCellDir) {
+				case 'se':
+					angle = 45;
+					break;
+				case 'sw':
+					angle = 135;
+					break;
+				case 'nw':
+					angle = 225;
+					break;
+				case 'ne':
+					angle = 315;
+					break;
+			}
+			var radians = angle * (Math.PI / 180);
+			var t = { x: endPoint.x + _canvasD * Math.cos(radians), y: endPoint.y + _canvasD * Math.sin(radians) };
+			drawLine(_ctxs['laser'], endPoint.x, endPoint.y, t.x, t.y);
 			return false;
 		}
 
