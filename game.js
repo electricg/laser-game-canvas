@@ -660,12 +660,14 @@ var LaserGame = function() {
 	var getSelectedCell = function(x, y) {
 		var index = 0;
 
-		for (var r = 0; r < _opt.rows; r++) {
-			if (y <= (r + 1) * _cellH) {
-				for (var c = 1; c <= _opt.columns; c++) {
-					if (x <= c * _cellW) {
-						index = r * _opt.columns + c;
-						return index;
+		if (y >= _startY && x >= _startX && y <= (_startY + _cellH * _opt.rows) && x <= (_startX + _cellW * _opt.columns)) {
+			for (var r = 0; r < _opt.rows; r++) {
+				if (y <= (r + 1) * _cellH + _startY) {
+					for (var c = 1; c <= _opt.columns; c++) {
+						if (x <= c * _cellW + _startX) {
+							index = r * _opt.columns + c;
+							return index;
+						}
 					}
 				}
 			}
@@ -680,6 +682,10 @@ var LaserGame = function() {
 	var click = function() {
 		var pos = mousePositionElement(),
 			cell = getSelectedCell(pos.x, pos.y);
+
+		if (cell === 0) {
+			return;
+		}
 
 		// console.log(cell);
 
@@ -749,6 +755,10 @@ var LaserGame = function() {
 
 		var pos = mousePositionElement(),
 			cell = getSelectedCell(pos.x, pos.y);
+
+		if (cell === 0) {
+			return;
+		}
 
 		// check if it's possible to drop the cell here
 		if (_cells[cell].type === 'empty') {
