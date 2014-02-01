@@ -33,7 +33,9 @@ var LaserGame = function() {
 		_canvasW,
 		_canvasH,
 		_cellW,
-		_cellH;
+		_cellH,
+		_startX,
+		_startY;
 
 	var _ctx = canvas.getContext('2d'),
 		_cellW_2,
@@ -90,25 +92,23 @@ var LaserGame = function() {
 
 
 	var initCanvas = function() {
-		_canvasW = _docHeight * _opt.columns / _opt.rows;
+		_canvasW = _docHeight * (_opt.columns + 2) / (_opt.rows + 2);
 
-		if (_canvasW <= _docWidth) {
-			_canvasH = _docHeight;
-		}
-		else {
-			_canvasH = _docWidth * _opt.rows / _opt.columns;
+		if (_canvasW > _docWidth) {
 			_canvasW = _docWidth;
 		}
 
-		_cellW = Math.floor(_canvasW / _opt.columns);
+		_cellW = Math.floor(_canvasW / (_opt.columns + 2));
 
 		if (isEven(_cellW)) {
 			_cellW = _cellW - 1;
 		}
 
 		_cellH = _cellW;
-		_canvasW = _cellW * _opt.columns;
-		_canvasH = _cellH * _opt.rows;
+		_canvasW = _docWidth;
+		_canvasH = _docHeight;
+		_startX = (_canvasW - (_cellW * _opt.columns)) / 2;
+		_startY = (_canvasH - (_cellH * _opt.rows)) / 2;
 
 		canvas.setAttribute('height', _canvasH);
 		canvas.setAttribute('width', _canvasW);
@@ -157,12 +157,11 @@ var LaserGame = function() {
 	 * Calculate cells coordinate
 	 */
 	var calcCells = function() {
-		var x = 0,
-			y = 0,
-			gy = 0,
+		var x, y,
+			gy = _startY,
 			counter = 0;
 		for (var r = 0; r < _opt.rows; r++) {
-			x = 0;
+			x = _startX;
 			y = gy;
 			gy += _cellH;
 			for (var c = 0; c < _opt.columns; c++) {
@@ -508,7 +507,7 @@ var LaserGame = function() {
 		ctx.strokeStyle = COLORS.grid;
 
 		// vertical
-		x1 = 0;
+		x1 = _startX;
 		y1 = 0;
 		y2 = _canvasH;
 		for (var i = 0; i <= _opt.columns; i++) {
@@ -518,7 +517,7 @@ var LaserGame = function() {
 		// horizontal
 		x1 = 0;
 		x2 = _canvasW;
-		y1 = 0;
+		y1 = _startY;
 		for (var l = 0; l <= _opt.rows; l++) {
 			drawLine(ctx, x1, y1, x2, y1);
 			y1 += _cellH;
