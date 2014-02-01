@@ -93,13 +93,13 @@ var LaserGame = function() {
 
 
 	var initCanvas = function() {
-		_canvasW = _docHeight * (_opt.columns + 2) / (_opt.rows + 2);
+		_canvasW = _docHeight * (_opt.columns + LAYOUT.padding) / (_opt.rows + LAYOUT.padding);
 
 		if (_canvasW > _docWidth) {
 			_canvasW = _docWidth;
 		}
 
-		_cellW = Math.floor(_canvasW / (_opt.columns + 2));
+		_cellW = Math.floor(_canvasW / (_opt.columns + LAYOUT.padding));
 
 		if (isEven(_cellW)) {
 			_cellW = _cellW - 1;
