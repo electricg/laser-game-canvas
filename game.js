@@ -106,6 +106,7 @@ var LaserGame = function() {
 		}
 
 		_cellH = _cellW;
+		_cellW--; // Fix to avoid a width leaking
 		_canvasW = _docWidth;
 		_canvasH = _docHeight;
 		_startX = (_canvasW - (_cellW * _opt.columns)) / 2;
