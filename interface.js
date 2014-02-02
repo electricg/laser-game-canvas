@@ -2,7 +2,10 @@ var l1 = 0, l2 = 0;
 var init = function() {
 	// Prevent scrolling http://www.html5rocks.com/en/mobile/touch/
 	document.body.on('touchmove', function(event) {
-		prev(event);
+		// Let the menu content scroll
+		if (!hasClass(event.target, 'menu-content')) {
+			prev(event);
+		}
 	}, false);
 
 	var _headerHeight = document.getElementById('header').offsetHeight;
