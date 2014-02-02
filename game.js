@@ -410,28 +410,28 @@ var LaserGame = function() {
 		w = w - 2;
 		h = h - 2;
 		r = r - 1;
-		var a_x = h_x = x + r,
-			a_y = b_y = c_y = n_y = y,
-			b_x = g_x = x + w - r,
-			c_x = d_x = e_x = f_x = x + w,
-			d_y = m_y = y + r,
-			e_y = l_y = y + h - r,
-			f_y = g_y = h_y = i_y = y + h,
-			i_x = l_x = m_x = n_x = x;
+		var r1_x = r4_x = x + r,
+			r1_y = r2_y = y + r,
+			r2_x = r3_x = x + w - r,
+			r3_y = r4_y = y + h - r;
+		var a_x = x + w - r,
+			a_y = y,
+			b_x = x + w,
+			b_y = y + h - r,
+			c_x = x + r,
+			c_y = y + h,
+			d_x = x,
+			d_y = y + r;
 
 		ctx.beginPath();
-		ctx.moveTo(a_x, a_y);
+		ctx.arc(r1_x, r1_y, r, Math.PI, 1.5 * Math.PI);
+		ctx.lineTo(a_x, a_y);
+		ctx.arc(r2_x, r2_y, r, 1.5 * Math.PI, 0);
 		ctx.lineTo(b_x, b_y);
-		ctx.arcTo(c_x, c_y, d_x, d_y, r);
-		ctx.lineTo(e_x, e_y);
-		ctx.arcTo(f_x, f_y, g_x, g_y, r);
-		ctx.lineTo(h_x, h_y);
-		ctx.arcTo(i_x, i_y, l_x, l_y, r);
-		ctx.lineTo(m_x, m_y);
-		ctx.arcTo(n_x, n_y, a_x, a_y, r);
-
-		// ctx.beginPath();
-		// ctx.rect(x, y, w, h);
+		ctx.arc(r3_x, r3_y, r, 0, 0.5 * Math.PI);
+		ctx.lineTo(c_x, c_y);
+		ctx.arc(r4_x, r4_y, r, 0.5 * Math.PI, Math.PI);
+		ctx.lineTo(d_x, d_y);
 	};
 
 
