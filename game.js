@@ -979,6 +979,28 @@ var LaserGame = function() {
 	};
 
 
+	/**
+	 * Check if there is a laser that goes through the point with the same direction - to avoid infinite loops
+	 * @param {number} x - X coordinate
+	 * @param {number} y - Y coordinate
+	 * @param {string} dir - Laser direction
+	 * @returns boolean - Returns true if it exists
+	 */
+	var isAlreadyLaser = function(x, y, dir) {
+		var l = _points.length;
+
+		for (var i = 0; i < l; i++) {
+			if (_points[i].x === x &&
+				_points[i].y === y &&
+				_points[i].dir === dir) {
+				return true;
+			}
+		}
+
+		return false;
+	};
+
+
 	/** Check if the point is a target
 	 * @param {number} x - Center point x coordinate
 	 * @param {number} y - Center point y coordinate
@@ -1090,7 +1112,10 @@ var LaserGame = function() {
 					// laser #2 reflects with a 90deg angle
 					var endSide2 = side,
 						endDir2 = dir.replace(oppositeSide(endSide2), endSide2);
-					drawLaser(cell, endSide2, endDir2, _lasersCounter++);
+					var cell2 = calcCoordinate(cell, endSide2)
+					if (!isAlreadyLaser(cell2.x, cell2.y, endDir2)) {
+						drawLaser(cell, endSide2, endDir2, _lasersCounter++);
+					}
 					break;
 
 				case 'prism':
