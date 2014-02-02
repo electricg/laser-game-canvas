@@ -32,11 +32,11 @@ var LaserGame = function() {
 		_docHeight = LAYOUT.maxHeight,
 		_canvasW,
 		_canvasH,
-		_canvasD,
+		_canvasD, // measure of the diagonal of the canvas
 		_cellW,
 		_cellH,
-		_startX,
-		_startY;
+		_startX, // x coordinate of where the actual grid starts
+		_startY; // y coordinate of where the actual grid starts
 
 	var _ctx = canvas.getContext('2d'),
 		_cellW_2,
