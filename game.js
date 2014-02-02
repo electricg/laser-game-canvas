@@ -1033,6 +1033,7 @@ var LaserGame = function() {
 			x: x + _canvasD * Math.cos(radians),
 			y: y + _canvasD * Math.sin(radians)
 		};
+		_ctxs['laser'].strokeStyle = COLORS.laser;
 		drawLine(_ctxs['laser'], x, y, end.x, end.y);
 	};
 
