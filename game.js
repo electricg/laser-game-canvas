@@ -1009,6 +1009,39 @@ var LaserGame = function() {
 
 
 	/**
+	 * Draw the laser from the edge of the grid to the edge of the canvas
+	 * @param {string} dir - Laser direction
+	 * @param {number} x - Starting point x coordinate
+	 * @param {number} y - Starting point y coordinate
+	 */
+	var drawEndingLaser = function(dir, x, y) {
+		var angle = 0;
+		switch(dir) {
+			case 'se':
+				angle = 45;
+				break;
+			case 'sw':
+				angle = 135;
+				break;
+			case 'nw':
+				angle = 225;
+				break;
+			case 'ne':
+				angle = 315;
+				break;
+		}
+		var radians = angle * (Math.PI / 180);
+		// the canvas diagonal is the longest distance between two points,
+		// therefore it's used to draw the ending laser
+		var end = {
+			x: x + _canvasD * Math.cos(radians),
+			y: y + _canvasD * Math.sin(radians)
+		};
+		drawLine(_ctxs['laser'], x, y, end.x, end.y);
+	};
+
+
+	/**
 	 * Draw lasers
 	 * @param {number} cell - Cell id
 	 * @param {string} side - Side of the cell
@@ -1090,26 +1123,9 @@ var LaserGame = function() {
 		var nextCellSide = oppositeSide(endSide);
 		var nextCellDir = endDir;
 
-		// end if out of the canvas
+		// draw a line to the edge of the canvas if out of the grid
 		if (nextCellId === false) {
-			var angle = 0;
-			switch(nextCellDir) {
-				case 'se':
-					angle = 45;
-					break;
-				case 'sw':
-					angle = 135;
-					break;
-				case 'nw':
-					angle = 225;
-					break;
-				case 'ne':
-					angle = 315;
-					break;
-			}
-			var radians = angle * (Math.PI / 180);
-			var t = { x: endPoint.x + _canvasD * Math.cos(radians), y: endPoint.y + _canvasD * Math.sin(radians) };
-			drawLine(_ctxs['laser'], endPoint.x, endPoint.y, t.x, t.y);
+			drawEndingLaser(nextCellDir, endPoint.x, endPoint.y);
 			return false;
 		}
 
