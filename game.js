@@ -681,8 +681,8 @@ var LaserGame = function() {
 	/**
 	 *	Click on cell
 	 */
-	var click = function() {
-		var pos = mousePositionElement(),
+	var click = function(event) {
+		var pos = mousePositionElement(event),
 			cell = getSelectedCell(pos.x, pos.y);
 
 		if (cell === 0) {
@@ -735,9 +735,9 @@ var LaserGame = function() {
 	/**
 	 * Update moving layer while moving mouse
 	 */
-	var updateLayerMoving = function() {
+	var updateLayerMoving = function(event) {
 		// console.log('moving');
-		var pos = mousePositionElement();
+		var pos = mousePositionElement(event);
 		clearMovingCanvas();
 		// draw cell at current mouse point
 		drawCell(_ctxs['moving'], pos.x - _cellW_2, pos.y - _cellH_2, _cells[_movingCell].type);
@@ -747,7 +747,7 @@ var LaserGame = function() {
 	/**
 	 * Dropped piece
 	 */
-	var pieceDropped = function() {
+	var pieceDropped = function(event) {
 		// console.log('dropped');
 		canvas.removeEventListener('mousemove', updateLayerMoving);
 		canvas.removeEventListener('touchmove', updateLayerMoving);
@@ -755,7 +755,7 @@ var LaserGame = function() {
 		canvas.removeEventListener('touchend', pieceDropped);
 		clearMovingCanvas();
 
-		var pos = mousePositionElement(),
+		var pos = mousePositionElement(event),
 			cell = getSelectedCell(pos.x, pos.y);
 
 		if (cell === 0) {
