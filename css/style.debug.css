@@ -237,6 +237,83 @@ canvas {
   background: #CCC;
 }
 
+/* Victory */
+.main {
+  position: relative;
+}
+
+.victory {
+  background: rgba(0, 0, 0, 0.7);
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  z-index: -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.victory.show {
+  -webkit-animation: victory 4s 1;
+  -o-animation: victory 4s 1;
+  animation: victory 4s 1;
+}
+
+@-webkit-keyframes victory {
+  0% {
+    opacity: 0;
+    z-index: -1;
+  }
+
+  60% {
+    opacity: 1;
+    z-index: 2;
+  }
+
+  100% {
+    opacity: 0;
+    z-index: -1;
+  }
+}
+
+@-o-keyframes victory {
+  0% {
+    opacity: 0;
+    z-index: -1;
+  }
+
+  60% {
+    opacity: 1;
+    z-index: 2;
+  }
+
+  100% {
+    opacity: 0;
+    z-index: -1;
+  }
+}
+
+@keyframes victory {
+  0% {
+    opacity: 0;
+    z-index: -1;
+  }
+
+  60% {
+    opacity: 1;
+    z-index: 2;
+  }
+
+  100% {
+    opacity: 0;
+    z-index: -1;
+  }
+}
+
 @media (min-width: 320px) {
   .header .level-nav-button {
     padding: 1em 0.5em;

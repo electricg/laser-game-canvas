@@ -163,3 +163,43 @@ canvas {
 		}
 	}
 }
+
+/* Victory */
+.main {
+	position: relative;
+}
+.victory {
+	background: rgba(#000, 0.7);
+	bottom: 0;
+	left: 0;
+	opacity: 0;
+	position: absolute;
+	right: 0;
+	text-align: center;
+	top: 0;
+	z-index: -1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.victory.show {
+	@each $prefix in -webkit-, -o-, '' {
+		#{$prefix}animation: victory 4s 1;
+	}
+}
+@mixin keyframes($name) {
+	@-webkit-keyframes #{$name} {
+		@content; 
+	}
+	@-o-keyframes #{$name} {
+		@content;
+	}
+	@keyframes #{$name} {
+		@content;
+	} 
+}
+@include keyframes(victory) {
+	0%   { opacity: 0; z-index: -1; }
+	60%  { opacity: 1; z-index: 2; }
+	100% { opacity: 0; z-index: -1; }
+}

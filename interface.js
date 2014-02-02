@@ -42,6 +42,7 @@ var init = function() {
 				addClass(this, s);
 				addClass($id, o);
 			}
+			eraseVictory();
 		});
 	}
 
@@ -113,6 +114,7 @@ var init = function() {
 					l2 = levels[l1].length - 1;
 				}
 			}
+			eraseVictory();
 			setGame();
 		});
 	}
@@ -120,6 +122,21 @@ var init = function() {
 	// Level title
 	function setTitle() {
 		$title.innerHTML = 'L1: ' + (l1 + 1) + ' - L2: ' + (l2 + 1);
+	}
+
+	// Victory
+	var $victory = $('.victory')[0],
+		$canvas = $$('#' + GAME_OPTS.canvasId);
+	window.drawVictory = function() {
+		// alert('won');
+		addClass($victory, 'show');
+		$canvas.on('mousedown', eraseVictory);
+		$canvas.on('touchstart', eraseVictory);
+	}
+	function eraseVictory() {
+		removeClass($victory, 'show');
+		$canvas.removeEventListener('mousedown', eraseVictory);
+		$canvas.removeEventListener('touchstart', eraseVictory);
 	}
 
 	// Init level

@@ -229,7 +229,7 @@ var LaserGame = function() {
 	 */
 	var checkVictory = function() {
 		if (_victory.length === 0) {
-			alert('won');
+			drawVictory();
 			return true;
 		}
 		return false;
