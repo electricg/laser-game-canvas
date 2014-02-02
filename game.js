@@ -661,7 +661,8 @@ var LaserGame = function() {
 	var getSelectedCell = function(x, y) {
 		var index = 0;
 
-		if (y >= _startY && x >= _startX && y <= (_startY + _cellH * _opt.rows) && x <= (_startX + _cellW * _opt.columns)) {
+		if (y >= _startY && y <= (_canvasH - _startY) &&
+			x >= _startX && x <= (_canvasW - _startX)) {
 			for (var r = 0; r < _opt.rows; r++) {
 				if (y <= (r + 1) * _cellH + _startY) {
 					for (var c = 1; c <= _opt.columns; c++) {
