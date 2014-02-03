@@ -116,6 +116,9 @@ div:first-of-type .target_del,
 		<div>
 			<label>Blackhole stuck: <input type="text" class="cells_blackhole_stuck"></label>
 		</div>
+		<div>
+			<label>Glass stuck: <input type="text" class="cells_glass_stuck"></label>
+		</div>
 	</fieldset>
 
 	<fieldset>
@@ -140,6 +143,9 @@ div:first-of-type .target_del,
 		<div>
 			<label>Blackhole stuck: <input type="text" class="solution_blackhole_stuck"></label>
 		</div>
+		<div>
+			<label>Glass stuck: <input type="text" class="solution_glass_stuck"></label>
+		</div>
 	</fieldset>
 	<input type="button" id="create" value="create">
 </form>
@@ -160,7 +166,8 @@ var emtpy_level = {
 		{ type : 'glass', arr : [] },
 		{ type : 'prism', arr : [] },
 		{ type : 'mirror_stuck', arr : [] },
-		{ type : 'blackhole_stuck', arr : [] }
+		{ type : 'blackhole_stuck', arr : [] },
+		{ type : 'glass_stuck', arr : [] }
 	],
 	l1: 0,
 	l2: 0,
@@ -170,7 +177,8 @@ var emtpy_level = {
 		{ type : 'glass', arr : [] },
 		{ type : 'prism', arr : [] },
 		{ type : 'mirror_stuck', arr : [] },
-		{ type : 'blackhole_stuck', arr : [] }
+		{ type : 'blackhole_stuck', arr : [] },
+		{ type : 'glass_stuck', arr : [] }
 	]
 };
 

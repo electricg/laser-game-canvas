@@ -16,6 +16,8 @@
  * same as mirror, but without the possibility to move the cell;
  * == blackhole_stuck:
  * same as blackhole, but without the possibility to move the cell.
+ * == glass_stuck:
+ * same as glass, but without the possibility to move the cell.
  */
 
 
@@ -668,7 +670,8 @@ var LaserGame = function() {
 		if (_cells[cell].type === 'empty' ||
 			_cells[cell].type === 'none' ||
 			_cells[cell].type === 'mirror_stuck' ||
-			_cells[cell].type === 'blackhole_stuck') {
+			_cells[cell].type === 'blackhole_stuck' ||
+			_cells[cell].type === 'glass_stuck') {
 			return false;
 		}
 		else {
@@ -1079,6 +1082,7 @@ var LaserGame = function() {
 					break;
 
 				case 'glass':
+				case 'glass_stuck':
 					// laser #1 go through
 					endDir = dir;
 					endSide = dir.replace(side, "").replace(oppositeSide(side), "");
