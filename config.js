@@ -21,7 +21,8 @@ var COLORS = {
 	glass : rgba('#FFF', ALPHA),
 	prism : rgba('#FF0', ALPHA),
 	mirror_stuck : rgba('#FFF', ALPHA),
-	blackhole_stuck : rgba('#444', ALPHA)
+	blackhole_stuck : rgba('#444', ALPHA),
+	glass_stuck : rgba('#FFF', ALPHA)
 };
 var LAYOUT = {
 	padding : 1, // left+right space around the grid, in cell size
@@ -52,7 +53,8 @@ var emtpy_level = {
 		{ type : 'glass', arr : [] },
 		{ type : 'prism', arr : [] },
 		{ type : 'mirror_stuck', arr : [] },
-		{ type : 'blackhole_stuck', arr : [] }
+		{ type : 'blackhole_stuck', arr : [] },
+		{ type : 'glass_stuck', arr : [] }
 	],
 	solution: [
 		{ type : 'mirror', arr : [] },
@@ -60,7 +62,8 @@ var emtpy_level = {
 		{ type : 'glass', arr : [] },
 		{ type : 'prism', arr : [] },
 		{ type : 'mirror_stuck', arr : [] },
-		{ type : 'blackhole_stuck', arr : [] }
+		{ type : 'blackhole_stuck', arr : [] },
+		{ type : 'glass_stuck', arr : [] }
 	]
 };
 */

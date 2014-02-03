@@ -329,11 +329,7 @@ var LaserGame = function() {
 		ctx.fill();
 		ctx.stroke();
 
-		if (type.indexOf('stuck') != -1) {
-			drawScrews(ctx, x, y);
-		}
-
-		if (type === 'glass') {
+		if (type === 'glass' || type === "glass_stuck") {
 			var d = _cellW / 10;
 			ctx.fillStyle = COLORS['blackhole'];
 			drawRoundRect(ctx, x+1, y+1, _cellW-d, _cellH-d, _cellR-2);
@@ -343,6 +339,10 @@ var LaserGame = function() {
 			drawRoundRect(ctx, x+d-2, y+d-2, _cellW-d*2+3, _cellH-d*2+3, _cellR-d);
 			ctx.fill();
 			drawCircle(ctx, x + _screwDistance, y + _screwDistance, _screwRadius, COLORS[type]);
+		}
+
+		if (type.indexOf('stuck') != -1) {
+			drawScrews(ctx, x, y);
 		}
 
 		if (type === 'prism') {
@@ -454,7 +454,7 @@ var LaserGame = function() {
 		var r_2 = r / 2;
 		ctx.strokeStyle = COLORS['empty_stroke'];
 		drawCircle(ctx, x, y, r, COLORS['empty']);
-		// ctx.stroke();
+		ctx.stroke();
 		drawLine(ctx, x-r_2, y-r_2, x+r_2, y+r_2);
 		drawLine(ctx, x+r_2, y-r_2, x-r_2, y+r_2);
 	};
