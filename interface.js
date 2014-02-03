@@ -17,6 +17,13 @@ var init = function() {
 	var game = new LaserGame();
 	setGame();
 
+	window.onresize = function() {
+		_headerHeight = document.getElementById('header').offsetHeight;
+		var w = document.documentElement.clientWidth,
+			h = document.documentElement.clientHeight - _headerHeight;
+		game.reload(w, h);
+	};
+
 	// Overlay
 	var $overlayLinks = $('.js-overlay'),
 		$overlayDivs = {},

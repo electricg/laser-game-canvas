@@ -94,40 +94,59 @@ var LaserGame = function() {
 	};
 
 
-	var initCanvas = function() {
-		_canvasW = _docHeight * (_opt.columns + LAYOUT.padding) / (_opt.rows + LAYOUT.padding);
+	this.reload = function(w, h) {
+		console.log('resize');
+		_docWidth = w;
+		_docHeight = h;
 
-		if (_canvasW > _docWidth) {
-			_canvasW = _docWidth;
-		}
-
-		_cellW = Math.floor(_canvasW / (_opt.columns + LAYOUT.padding));
-
-		if (isEven(_cellW)) {
-			_cellW = _cellW - 1;
-		}
-
-		_cellH = _cellW;
-		_cellW--; // Fix to avoid a width leaking
-		_canvasW = _docWidth;
-		_canvasH = _docHeight;
-		_startX = (_canvasW - (_cellW * _opt.columns)) / 2;
-		_startY = (_canvasH - (_cellH * _opt.rows)) / 2;
-		_canvasD = Math.sqrt(Math.pow(_canvasW, 2) + Math.pow(_canvasH, 2));
+		calcSizes();
 
 		canvas.setAttribute('height', _canvasH);
 		canvas.setAttribute('width', _canvasW);
 
-		_cellW_2 = _cellW / 2;
-		_cellH_2 = _cellH / 2;
-		_cellR = _cellW / 4; // radius of cell corners
+		for (var i = 0; i < _layers.length; i++) {
+			var li = _layers[i];
+			_canvases[li].setAttribute('height', _canvasH);
+			_canvases[li].setAttribute('width', _canvasW);
+			_ctxs[li].clearRect(0, 0, _canvasW, _canvasH);
+		}
+
+		// calcCells();
+		var x, y,
+			gy = _startY,
+			counter = 1;
+		for (var r = 0; r < _opt.rows; r++) {
+			x = _startX;
+			y = gy;
+			gy += _cellH;
+			for (var c = 0; c < _opt.columns; c++) {
+				_cells[counter].x = x;
+				_cells[counter].y = y;
+				x += _cellW;
+				counter++;
+			}
+		}
+
+		// initCells();
+		// not needed
+
+		initTargets();
+		initVictory();
+		drawStuff();
+		initLasers();
+		checkVictory();
+	};
+
+
+	var initCanvas = function() {
+		calcSizes();
+		
+		canvas.setAttribute('height', _canvasH);
+		canvas.setAttribute('width', _canvasW);
+
 		_cells = [{}]; // first item empty
 		_cellsLength = _opt.rows * _opt.columns;
 		_movingCell = null;
-		_targetRadius = _cellW / 8;
-		_starterRadius = _cellW / 16;
-		_screwRadius = _cellW / 12;
-		_screwDistance = _cellW / 5;
 
 		_canvases = [];
 		_ctxs = [];
@@ -151,6 +170,40 @@ var LaserGame = function() {
 			_canvases[li].setAttribute('width', _canvasW);
 			_ctxs[li] = _canvases[li].getContext('2d');
 		}
+	};
+
+
+	/**
+	 * Calculate sizes of the elements
+	 */
+	var calcSizes = function() {
+		_canvasW = _docHeight * (_opt.columns + LAYOUT.padding) / (_opt.rows + LAYOUT.padding);
+
+		if (_canvasW > _docWidth) {
+			_canvasW = _docWidth;
+		}
+
+		_cellW = Math.floor(_canvasW / (_opt.columns + LAYOUT.padding));
+
+		if (isEven(_cellW)) {
+			_cellW = _cellW - 1;
+		}
+
+		_cellH = _cellW;
+		_cellW--; // Fix to avoid a width leaking
+		_canvasW = _docWidth;
+		_canvasH = _docHeight;
+		_startX = (_canvasW - (_cellW * _opt.columns)) / 2;
+		_startY = (_canvasH - (_cellH * _opt.rows)) / 2;
+		_canvasD = Math.sqrt(Math.pow(_canvasW, 2) + Math.pow(_canvasH, 2));
+
+		_cellW_2 = _cellW / 2;
+		_cellH_2 = _cellH / 2;
+		_cellR = _cellW / 4; // radius of cell corners
+		_targetRadius = _cellW / 8;
+		_starterRadius = _cellW / 16;
+		_screwRadius = _cellW / 12;
+		_screwDistance = _cellW / 5;
 	};
 
 
