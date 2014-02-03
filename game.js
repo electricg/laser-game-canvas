@@ -124,14 +124,10 @@ var LaserGame = function() {
 		_cells = [{}]; // first item empty
 		_cellsLength = _opt.rows * _opt.columns;
 		_movingCell = null;
-		_points = [];
-		_lasersCounter = 0;
 		_targetRadius = _cellW / 8;
 		_starterRadius = _cellW / 16;
 		_screwRadius = _cellW / 12;
 		_screwDistance = _cellW / 5;
-		_targets = [];
-		_victory = [];
 
 		_canvases = [];
 		_ctxs = [];
@@ -207,6 +203,7 @@ var LaserGame = function() {
 	var initTargets = function() {
 		var o = _opt.targets,
 			target;
+		_targets = [];
 		for (var i = 0; i < o.length; i++) {
 			target = calcCoordinate(o[i].cell, o[i].side);
 			_targets.push(target.x + '_' + target.y);
@@ -269,6 +266,7 @@ var LaserGame = function() {
 	var initLasers = function() {
 		_ctxs['laser'].clearRect(0, 0, _canvasW, _canvasH);
 		resetPoints();
+		_lasersCounter = 0;
 		var n = _opt.lasers;
 		for (var i = 0; i < n.length; i++) {
 			_lasersCounter++;
