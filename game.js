@@ -1104,19 +1104,18 @@ var LaserGame = function() {
 			}
 		}
 
+		// exit if this laser is going through an existing point with the same direction
+		if (isAlreadyPoint(endPoint.x, endPoint.y, endDir, laserId)) {
+			return false;
+		}
+
+		// save point
+		savePoint(endPoint.x, endPoint.y, endDir, laserId);
+
+		// check if the point is a target
+		checkPoint(endPoint.x, endPoint.y);
+
 		if (startPoint.x != endPoint.x || startPoint.y != endPoint.y) {
-
-			// exit if this laser is going through an existing point with the same direction
-			if (isAlreadyPoint(endPoint.x, endPoint.y, endDir, laserId)) {
-				return false;
-			}
-
-			// save point
-			savePoint(endPoint.x, endPoint.y, endDir, laserId);
-
-			// check if the point is a target
-			checkPoint(endPoint.x, endPoint.y);
-
 			// draw laser
 			_ctxs['laser'].strokeStyle = COLORS.laser;
 			drawLine(_ctxs['laser'], startPoint.x, startPoint.y, endPoint.x, endPoint.y);
