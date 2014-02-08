@@ -94,6 +94,33 @@ var LaserGame = function() {
 	};
 
 
+	/**
+	 * Show solution
+	 */
+	this.solution = function() {
+		var n = _opt.solution,
+			len = n.length;
+		// reset cells if not none
+		for (var i = 1; i <= _cellsLength; i++) {
+			if (_cells[i].type !== 'none') {
+				_cells[i].type = 'empty';
+			}
+		}
+		// load solution
+		for (var i = 0; i < len; i++) {
+			for (var l = 0; l < n[i].arr.length; l++) {
+				_cells[ n[i].arr[l] ].type = n[i].type;
+			}
+		}
+		// reset canvas cells
+		_ctxs['cells'].clearRect(0, 0, _canvasW, _canvasH);
+		// draw normal cells
+		drawLayerCells(n);
+		// redraw lasers
+		initLasers();
+	};
+
+
 	var initCanvas = function() {
 		_canvasW = _docHeight * (_opt.columns + LAYOUT.padding) / (_opt.rows + LAYOUT.padding);
 
@@ -254,7 +281,7 @@ var LaserGame = function() {
 		drawTargetBg();
 
 		// draw normal cells
-		drawLayerCells();
+		drawLayerCells(_opt.cells);
 
 		// draw grid
 		if (DEBUG === true) {
@@ -575,9 +602,10 @@ var LaserGame = function() {
 
 	/**
 	 * Draw block cells
+	 * @param {array} conf - Cells type
 	 */
-	var drawLayerCells = function() {
-		var m = _opt.cells;
+	var drawLayerCells = function(conf) {
+		var m = conf;
 		for (var i = 0; i < m.length; i++) {
 			for (var h = 0; h < m[i].arr.length; h++) {
 				drawCellFromId(_ctxs['cells'], m[i].arr[h]);

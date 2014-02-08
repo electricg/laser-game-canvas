@@ -142,6 +142,37 @@ var init = function() {
 		$canvas.removeEventListener('touchstart', eraseVictory);
 	}
 
+	// Solution
+	function eraseSolution() {
+		removeClass($solution, 'show');
+		document.body.removeEventListener('mousedown', checkSolution);
+		document.body.removeEventListener('touchstart', checkSolution);
+	}
+	function checkSolution(event) {
+		if (event.target.id !== 'level-solution' && event.target.id !== 'title') {
+			eraseSolution();
+		}
+	}
+	var $levelSolution = $$('#level-solution'),
+		$solution = $$('#solution');
+	$levelSolution.on('click', function(event) {
+		prev(event);
+		eraseSolution();
+		game.solution();
+	});
+	$title.on('click', function(event) {
+		if (hasClass($solution, 'show')) {
+			eraseSolution();
+		}
+		else {
+			removeClass($$('.' + s), s);
+			removeClass($$('.' + o), o);
+			addClass($solution, 'show');
+			document.body.on('mousedown', checkSolution);
+			document.body.on('touchstart', checkSolution);
+		}
+	});
+
 	// Init level
 	function setGame() {
 		game.init(levels[l1][l2]);

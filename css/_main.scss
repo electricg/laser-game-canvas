@@ -90,8 +90,13 @@ canvas {
 	}
 }
 .level-title {
+	cursor: pointer;
 	font-size: 0.8rem;
 	font-weight: bold;
+
+	&:hover, &:focus, &:active {
+		background: #444;
+	}
 }
 
 /* Overlay */
@@ -202,4 +207,16 @@ canvas {
 	0%   { opacity: 0; z-index: -1; }
 	60%  { opacity: 1; z-index: 2; }
 	100% { opacity: 0; z-index: -1; }
+}
+
+/* Solution */
+#solution {
+	bottom: auto;
+
+	&.show {
+		display: block;
+	}
+}
+#level-solution {
+	font-size: inherit;
 }

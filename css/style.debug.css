@@ -170,8 +170,12 @@ canvas {
 }
 
 .level-title {
+  cursor: pointer;
   font-size: 0.8rem;
   font-weight: bold;
+}
+.level-title:hover, .level-title:focus, .level-title:active {
+  background: #444;
 }
 
 /* Overlay */
@@ -312,6 +316,18 @@ canvas {
     opacity: 0;
     z-index: -1;
   }
+}
+
+/* Solution */
+#solution {
+  bottom: auto;
+}
+#solution.show {
+  display: block;
+}
+
+#level-solution {
+  font-size: inherit;
 }
 
 @media (min-width: 320px) {
