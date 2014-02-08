@@ -94,6 +94,33 @@ var LaserGame = function() {
 	};
 
 
+	/**
+	 * Show solution
+	 */
+	this.solution = function() {
+		var n = _opt.solution,
+			len = n.length;
+		// reset cells if not none
+		for (var i = 1; i <= _cellsLength; i++) {
+			if (_cells[i].type !== 'none') {
+				_cells[i].type = 'empty';
+			}
+		}
+		// load solution
+		for (var i = 0; i < len; i++) {
+			for (var l = 0; l < n[i].arr.length; l++) {
+				_cells[ n[i].arr[l] ].type = n[i].type;
+			}
+		}
+		// reset canvas cells
+		_ctxs['cells'].clearRect(0, 0, _canvasW, _canvasH);
+		// draw normal cells
+		drawLayerCells(n);
+		// redraw lasers
+		initLasers();
+	};
+
+
 	this.reload = function(w, h) {
 		console.log('resize');
 		_docWidth = w;
@@ -282,6 +309,7 @@ var LaserGame = function() {
 	var checkVictory = function() {
 		if (_victory.length === 0) {
 			drawVictory();
+			saveVictory(_opt.l1, _opt.l2);
 			return true;
 		}
 		return false;
@@ -304,7 +332,7 @@ var LaserGame = function() {
 		drawTargetBg();
 
 		// draw normal cells
-		drawLayerCells();
+		drawLayerCells(_opt.cells);
 
 		// draw grid
 		if (DEBUG === true) {
@@ -397,7 +425,20 @@ var LaserGame = function() {
 		}
 
 		if (type === 'prism') {
+			var xt = x + 3,
+				yt = y + 3,
+				_cellWt = _cellW - 6,
+				_cellHt = _cellH - 6,
+				b = _cellWt / 4;
 
+			drawRect(ctx, xt+_cellWt/2, yt, xt+_cellWt, yt+_cellHt/2, xt+_cellWt/2, yt+_cellHt, xt, yt+_cellHt/2, '#AAA', COLORS['prism']);
+			drawRect(ctx, xt+_cellWt/2-b, yt, xt+_cellWt, yt+_cellHt/2+b, xt+_cellWt/2+b, yt+_cellHt, xt, yt+_cellHt/2-b, '#888', COLORS['prism']);
+			drawRect(ctx, xt+_cellWt/2+b, yt, xt+_cellWt, yt+_cellHt/2-b, xt+_cellWt/2-b, yt+_cellHt, xt, yt+_cellHt/2+b, '#888', COLORS['prism']);
+			drawRect(ctx, xt+_cellWt/2, yt+b, xt+_cellWt/2+b, yt+_cellHt/2, xt+_cellWt/2, yt+_cellHt-b, xt+b, yt+_cellHt/2, '#666', COLORS['prism']);
+			drawRect(ctx, xt+_cellWt-b, yt, xt+_cellWt, yt+_cellHt/2-b, xt+_cellWt-b/2, yt+_cellHt/2-b/2, xt+_cellWt/2+b/2, yt+b/2, COLORS['empty'], COLORS['prism']);
+			drawRect(ctx, xt+_cellWt-b/2, yt+_cellHt/2+b/2, xt+_cellWt, yt+_cellHt/2+b, xt+_cellWt/2+b, yt+_cellHt, xt+_cellWt/2+b/2, yt+_cellHt-b/2, COLORS['empty'], COLORS['prism']);
+			drawRect(ctx, xt+b/2, yt+_cellHt/2+b/2, xt+_cellWt/2-b/2, yt+_cellHt-b/2, xt+_cellWt/2-b, yt+_cellHt, xt, yt+_cellHt/2+b, COLORS['empty'], COLORS['prism']);
+			drawRect(ctx, xt+_cellWt/2-b, yt, xt+_cellWt/2-b/2, yt+b/2, xt+b/2, yt+_cellHt/2-b/2, xt, yt+_cellHt/2-b, COLORS['glass'], COLORS['prism']);
 		}
 	};
 
@@ -418,6 +459,32 @@ var LaserGame = function() {
 		drawRoundRect(ctx, x, y, w, h, r);
 		ctx.fill();
 		ctx.stroke();
+	};
+
+
+	/**
+	 * Draw four sides shape
+	 * @param {object} ctx - Canvas context to work on
+	 * @param {number} x{1,4} - Point{1,4} x coordinate
+	 * @param {number} y{1,4} - Point{1,4} y coordinate
+	 * @param {string} - Fill style if any
+	 * @param {string} - Stroke style if any
+	 */
+	var drawRect = function(ctx, x1, y1, x2, y2, x3, y3, x4, y4, fill, stroke) {
+		ctx.beginPath();
+		ctx.moveTo(x1, y1);
+		ctx.lineTo(x2, y2);
+		ctx.lineTo(x3, y3);
+		ctx.lineTo(x4, y4);
+		ctx.closePath();
+		if (fill) {
+			ctx.fillStyle = fill;
+			ctx.fill();
+		}
+		if (stroke) {
+			ctx.strokeStyle = stroke;
+			ctx.stroke();
+		}
 	};
 
 
@@ -587,9 +654,10 @@ var LaserGame = function() {
 
 	/**
 	 * Draw block cells
+	 * @param {array} conf - Cells type
 	 */
-	var drawLayerCells = function() {
-		var m = _opt.cells;
+	var drawLayerCells = function(conf) {
+		var m = conf;
 		for (var i = 0; i < m.length; i++) {
 			for (var h = 0; h < m[i].arr.length; h++) {
 				drawCellFromId(_ctxs['cells'], m[i].arr[h]);
@@ -1155,19 +1223,18 @@ var LaserGame = function() {
 			}
 		}
 
+		// exit if this laser is going through an existing point with the same direction
+		if (isAlreadyPoint(endPoint.x, endPoint.y, endDir, laserId)) {
+			return false;
+		}
+
+		// save point
+		savePoint(endPoint.x, endPoint.y, endDir, laserId);
+
+		// check if the point is a target
+		checkPoint(endPoint.x, endPoint.y);
+
 		if (startPoint.x != endPoint.x || startPoint.y != endPoint.y) {
-
-			// exit if this laser is going through an existing point with the same direction
-			if (isAlreadyPoint(endPoint.x, endPoint.y, endDir, laserId)) {
-				return false;
-			}
-
-			// save point
-			savePoint(endPoint.x, endPoint.y, endDir, laserId);
-
-			// check if the point is a target
-			checkPoint(endPoint.x, endPoint.y);
-
 			// draw laser
 			_ctxs['laser'].strokeStyle = COLORS.laser;
 			drawLine(_ctxs['laser'], startPoint.x, startPoint.y, endPoint.x, endPoint.y);

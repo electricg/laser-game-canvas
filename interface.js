@@ -14,6 +14,8 @@ var init = function() {
 
 	var $title = $$('#title');
 
+	// var levels = JSON.parse(localStorage['levels']);
+
 	var game = new LaserGame();
 	setGame();
 
@@ -135,6 +137,13 @@ var init = function() {
 	}
 
 	// Victory
+	var victory = [];
+	if (window.localStorage && typeof localStorage.victory !== "undefined") {
+		victory = JSON.parse(localStorage.victory);
+	}
+	for (var i = 0; i < victory.length; i++) {
+		addClass($$('#l' + victory[i].l1 + '-' + victory[i].l2), 'level-done');
+	}
 	var $victory = $('.victory')[0],
 		$canvas = $$('#' + GAME_OPTS.canvasId);
 	window.drawVictory = function() {
@@ -142,12 +151,52 @@ var init = function() {
 		addClass($victory, 'show');
 		$canvas.on('mousedown', eraseVictory);
 		$canvas.on('touchstart', eraseVictory);
-	}
+	};
 	function eraseVictory() {
 		removeClass($victory, 'show');
 		$canvas.removeEventListener('mousedown', eraseVictory);
 		$canvas.removeEventListener('touchstart', eraseVictory);
 	}
+	window.saveVictory = function(l1, l2) {
+		var _l1 = l1 - 1,
+			_l2 = l2 - 1;
+		victory.push({ l1: _l1, l2: _l2 });
+		addClass($$('#l' + _l1 + '-' + _l2), 'level-done');
+		if (window.localStorage) {
+			localStorage.victory = JSON.stringify(victory);
+		}
+	};
+
+	// Solution
+	function eraseSolution() {
+		removeClass($solution, 'show');
+		document.body.removeEventListener('mousedown', checkSolution);
+		document.body.removeEventListener('touchstart', checkSolution);
+	}
+	function checkSolution(event) {
+		if (event.target.id !== 'level-solution' && event.target.id !== 'title') {
+			eraseSolution();
+		}
+	}
+	var $levelSolution = $$('#level-solution'),
+		$solution = $$('#solution');
+	$levelSolution.on('click', function(event) {
+		prev(event);
+		eraseSolution();
+		game.solution();
+	});
+	$title.on('click', function(event) {
+		if (hasClass($solution, 'show')) {
+			eraseSolution();
+		}
+		else {
+			removeClass($$('.' + s), s);
+			removeClass($$('.' + o), o);
+			addClass($solution, 'show');
+			document.body.on('mousedown', checkSolution);
+			document.body.on('touchstart', checkSolution);
+		}
+	});
 
 	// Init level
 	function setGame() {

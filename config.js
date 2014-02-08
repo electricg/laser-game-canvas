@@ -19,7 +19,7 @@ var COLORS = {
 	mirror : rgba('#FFF', ALPHA),
 	blackhole : rgba('#444', ALPHA),
 	glass : rgba('#FFF', ALPHA),
-	prism : rgba('#FF0', ALPHA),
+	prism : rgba('#CCC', ALPHA),
 	mirror_stuck : rgba('#FFF', ALPHA),
 	blackhole_stuck : rgba('#444', ALPHA),
 	glass_stuck : rgba('#FFF', ALPHA)
