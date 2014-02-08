@@ -128,6 +128,13 @@ var init = function() {
 	}
 
 	// Victory
+	var victory = [];
+	if (window.localStorage && typeof localStorage.victory !== "undefined") {
+		victory = JSON.parse(localStorage.victory);
+	}
+	for (var i = 0; i < victory.length; i++) {
+		addClass($$('#l' + victory[i].l1 + '-' + victory[i].l2), 'level-done');
+	}
 	var $victory = $('.victory')[0],
 		$canvas = $$('#' + GAME_OPTS.canvasId);
 	window.drawVictory = function() {
@@ -135,12 +142,21 @@ var init = function() {
 		addClass($victory, 'show');
 		$canvas.on('mousedown', eraseVictory);
 		$canvas.on('touchstart', eraseVictory);
-	}
+	};
 	function eraseVictory() {
 		removeClass($victory, 'show');
 		$canvas.removeEventListener('mousedown', eraseVictory);
 		$canvas.removeEventListener('touchstart', eraseVictory);
 	}
+	window.saveVictory = function(l1, l2) {
+		var _l1 = l1 - 1,
+			_l2 = l2 - 1;
+		victory.push({ l1: _l1, l2: _l2 });
+		addClass($$('#l' + _l1 + '-' + _l2), 'level-done');
+		if (window.localStorage) {
+			localStorage.victory = JSON.stringify(victory);
+		}
+	};
 
 	// Solution
 	function eraseSolution() {

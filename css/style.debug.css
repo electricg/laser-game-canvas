@@ -330,6 +330,10 @@ canvas {
   font-size: inherit;
 }
 
+.level-done {
+  background: green !important;
+}
+
 @media (min-width: 320px) {
   .header .level-nav-button {
     padding: 1em 0.5em;

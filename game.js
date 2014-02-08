@@ -259,6 +259,7 @@ var LaserGame = function() {
 	var checkVictory = function() {
 		if (_victory.length === 0) {
 			drawVictory();
+			saveVictory(_opt.l1, _opt.l2);
 			return true;
 		}
 		return false;
