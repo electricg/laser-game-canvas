@@ -14,6 +14,8 @@ var init = function() {
 
 	var $title = $$('#title');
 
+	// var levels = JSON.parse(localStorage['levels']);
+
 	var game = new LaserGame();
 	setGame();
 
