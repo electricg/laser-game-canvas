@@ -402,7 +402,7 @@ canvas {
 @media (min-width: 380px) {
   .header a {
     font-size: 1rem;
-    padding: 1em 0.5em;
+    padding: 1em 0.2em;
   }
   .header i {
     padding-right: 0.5em;
@@ -410,6 +410,12 @@ canvas {
 
   .l2 a {
     padding: 0;
+  }
+}
+@media (min-width: 400px) {
+  .header a {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
   }
 }
 
