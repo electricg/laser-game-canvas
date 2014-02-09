@@ -235,3 +235,33 @@ canvas {
 .level-done {
 	background: green !important;
 }
+
+/* About */
+.about {
+	text-align: left;
+
+	a {
+		color: #F00;
+		display: inline;
+		font-size: 1em;
+		line-height: normal;
+		padding: 0 !important;
+
+		.no-touch &:hover, &:focus, &:active {
+			background: transparent;
+			text-decoration: underline;
+		}
+	}
+}
+
+/* Reset */
+#reset {
+	background: #FFF;
+	color: #000;
+	cursor: pointer;
+	padding: 0.5em;
+
+	.no-touch &:hover, &:focus, &:active {
+		background: #CCC;
+	}
+}

@@ -203,6 +203,21 @@ var init = function() {
 		}
 	});
 
+	// Reset progress
+	var $reset = $$('#reset');
+	$reset.on('click', function(event) {
+		prev(event);
+		if (window.confirm('Do you really want to reset your progress?')) {
+			victory = [];
+			localStorage.victory = JSON.stringify(victory);
+			var l = $('.level-done'),
+				ll = l.length;
+			for (var i = 0; i < ll; i++) {
+				removeClass(l[i], 'level-done');
+			}
+		}
+	});
+
 	// Init level
 	function setGame() {
 		game.init(levels[l1][l2]);

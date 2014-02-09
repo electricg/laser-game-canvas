@@ -345,6 +345,33 @@ canvas {
   background: green !important;
 }
 
+/* About */
+.about {
+  text-align: left;
+}
+.about a {
+  color: #F00;
+  display: inline;
+  font-size: 1em;
+  line-height: normal;
+  padding: 0 !important;
+}
+.no-touch .about a:hover, .about a:focus, .about a:active {
+  background: transparent;
+  text-decoration: underline;
+}
+
+/* Reset */
+#reset {
+  background: #FFF;
+  color: #000;
+  cursor: pointer;
+  padding: 0.5em;
+}
+.no-touch #reset:hover, #reset:focus, #reset:active {
+  background: #CCC;
+}
+
 @media (min-width: 285px) {
   .level-title {
     width: 8em;
