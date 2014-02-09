@@ -72,6 +72,16 @@ var init = function() {
 		$li.appendChild($ul2);
 		$ul.appendChild($li);
 
+		(function(m) {
+			$span.on('click', function(event) {
+				prev(event);
+				l1 = m;
+				l2 = 0;
+				setGame();
+				$overlayLinks[1].click();
+			});
+		})(m);
+
 		for (n = 0; n < len2; n++) {
 			var $li2 = document.createElement('li'),
 				$a2 = document.createElement('a'),

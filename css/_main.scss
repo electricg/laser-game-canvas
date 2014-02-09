@@ -138,11 +138,18 @@ canvas {
 	}
 }
 .l1-title {
+	border: 1px solid #333;
+	cursor: pointer;
 	display: table-cell;
 	padding-right: 1em !important;
 	vertical-align: middle;
 	width: 1px;
 	white-space: nowrap;
+
+	.no-touch &:hover, &:focus, &:active {
+		background: #CCC;
+		color: #333;
+	}
 }
 .l2 {
 	li {
