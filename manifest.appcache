@@ -1,0 +1,19 @@
+CACHE MANIFEST
+# v 0.3.3
+
+CACHE:
+#modernizr.js
+#utils.js
+#mouse.js
+#config.js
+#levels.js
+#game.js
+#interface.js
+#css/style.debug.css
+#css/fonts/icons.eot
+#css/fonts/icons.woff
+#css/fonts/icons.ttf
+#css/fonts/icons.svg
+
+NETWORK:
+*

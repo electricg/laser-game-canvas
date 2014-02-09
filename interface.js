@@ -79,6 +79,16 @@ var init = function() {
 		$li.appendChild($ul2);
 		$ul.appendChild($li);
 
+		(function(m) {
+			$span.on('click', function(event) {
+				prev(event);
+				l1 = m;
+				l2 = 0;
+				setGame();
+				$overlayLinks[1].click();
+			});
+		})(m);
+
 		for (n = 0; n < len2; n++) {
 			var $li2 = document.createElement('li'),
 				$a2 = document.createElement('a'),
@@ -170,6 +180,7 @@ var init = function() {
 	// Solution
 	function eraseSolution() {
 		removeClass($solution, 'show');
+		removeClass($title, s);
 		document.body.removeEventListener('mousedown', checkSolution);
 		document.body.removeEventListener('touchstart', checkSolution);
 	}
@@ -193,8 +204,24 @@ var init = function() {
 			removeClass($$('.' + s), s);
 			removeClass($$('.' + o), o);
 			addClass($solution, 'show');
+			addClass(this, s);
 			document.body.on('mousedown', checkSolution);
 			document.body.on('touchstart', checkSolution);
+		}
+	});
+
+	// Reset progress
+	var $reset = $$('#reset');
+	$reset.on('click', function(event) {
+		prev(event);
+		if (window.confirm('Do you really want to reset your progress?')) {
+			victory = [];
+			localStorage.victory = JSON.stringify(victory);
+			var l = $('.level-done'),
+				ll = l.length;
+			for (var i = 0; i < ll; i++) {
+				removeClass(l[i], 'level-done');
+			}
 		}
 	});
 

@@ -1,3 +1,11 @@
+@media (min-width: 285px) {
+	.level-title {
+		width: 8em;
+	}
+	.victory {
+		font-size: 1em;
+	}
+}
 @media (min-width: 320px) {
 	.header {
 		.level-nav-button {
@@ -10,7 +18,8 @@
 	}
 	.level-title {
 		font-size: 1rem;
-		padding: 1em 0.5em;
+		padding-left: 0.5em;
+		padding-right: 0.5em;
 	}
 }
 

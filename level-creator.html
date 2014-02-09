@@ -265,11 +265,8 @@ $(document).ready(function(){
 						for (var m = 0; m < v.length; m++) {
 							v[m] = v[m] * 1;
 						}
+						o[arrs[i]].push({type: c, arr: v});
 					}
-					else {
-						v = [];
-					}
-					o[arrs[i]].push({type: c, arr: v});
 				});
 			}
 		}
