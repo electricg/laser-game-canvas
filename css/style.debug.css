@@ -83,6 +83,7 @@ you can use the generic selector below, but it's slower:
 
 html, body {
   height: 100%;
+  overflow: hidden;
 }
 
 body {
@@ -174,6 +175,8 @@ canvas {
   font-size: 0.8rem;
   font-weight: bold;
   text-align: left;
+  padding-bottom: 16px;
+  padding-top: 16px;
   width: 7em;
 }
 .no-touch .level-title:hover, .level-title:focus, .level-title:active, .level-title.selected {
@@ -257,6 +260,7 @@ canvas {
 .victory {
   background: rgba(0, 0, 0, 0.7);
   bottom: 0;
+  font-size: 0.8em;
   left: 0;
   opacity: 0;
   position: absolute;
@@ -376,6 +380,10 @@ canvas {
   .level-title {
     width: 8em;
   }
+
+  .victory {
+    font-size: 1em;
+  }
 }
 @media (min-width: 320px) {
   .header .level-nav-button {
@@ -387,7 +395,8 @@ canvas {
 
   .level-title {
     font-size: 1rem;
-    padding: 1em 0.5em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
   }
 }
 @media (min-width: 380px) {

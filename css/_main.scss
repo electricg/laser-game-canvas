@@ -5,6 +5,7 @@
 }
 html, body {
 	height: 100%;
+	overflow: hidden;
 }
 body {
 	background: #999;
@@ -94,6 +95,8 @@ canvas {
 	font-size: 0.8rem;
 	font-weight: bold;
 	text-align: left;
+	padding-bottom: 16px;
+	padding-top: 16px;
 	width: 7em;
 
 	.no-touch &:hover, &:focus, &:active, &.selected {
@@ -185,6 +188,7 @@ canvas {
 .victory {
 	background: rgba(#000, 0.7);
 	bottom: 0;
+	font-size: 0.8em;
 	left: 0;
 	opacity: 0;
 	position: absolute;
