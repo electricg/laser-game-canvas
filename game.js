@@ -38,7 +38,9 @@ var LaserGame = function() {
 		_cellW,
 		_cellH,
 		_startX, // x coordinate of where the actual grid starts
-		_startY; // y coordinate of where the actual grid starts
+		_startY, // y coordinate of where the actual grid starts
+		_endX, // x coordinate of where the actual grid ends
+		_endY; // y coordinate of where the actual grid ends
 
 	var _ctx = canvas.getContext('2d'),
 		_cellW_2,
@@ -135,11 +137,12 @@ var LaserGame = function() {
 		}
 
 		_cellH = _cellW;
-		_cellW--; // Fix to avoid a width leaking
 		_canvasW = _docWidth;
 		_canvasH = _docHeight;
-		_startX = (_canvasW - (_cellW * _opt.columns)) / 2;
-		_startY = (_canvasH - (_cellH * _opt.rows)) / 2;
+		_startX = Math.floor((_canvasW - (_cellW * _opt.columns)) / 2);
+		_startY = Math.floor((_canvasH - (_cellH * _opt.rows)) / 2);
+		_endX = _cellW * _opt.columns + _startX;
+		_endY = _cellH * _opt.rows + _startY;
 		_canvasD = Math.sqrt(Math.pow(_canvasW, 2) + Math.pow(_canvasH, 2));
 
 		canvas.setAttribute('height', _canvasH);
@@ -704,8 +707,8 @@ var LaserGame = function() {
 	var getSelectedCell = function(x, y) {
 		var index = 0;
 
-		if (y >= _startY && y <= (_canvasH - _startY) &&
-			x >= _startX && x <= (_canvasW - _startX)) {
+		if (y >= _startY && y <= _endY &&
+			x >= _startX && x <= _endX) {
 			for (var r = 0; r < _opt.rows; r++) {
 				if (y <= (r + 1) * _cellH + _startY) {
 					for (var c = 1; c <= _opt.columns; c++) {
