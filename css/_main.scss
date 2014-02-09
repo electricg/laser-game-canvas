@@ -93,6 +93,8 @@ canvas {
 	cursor: pointer;
 	font-size: 0.8rem;
 	font-weight: bold;
+	text-align: left;
+	width: 7em;
 
 	.no-touch &:hover, &:focus, &:active, &.selected {
 		background: #444;

@@ -173,6 +173,8 @@ canvas {
   cursor: pointer;
   font-size: 0.8rem;
   font-weight: bold;
+  text-align: left;
+  width: 7em;
 }
 .no-touch .level-title:hover, .level-title:focus, .level-title:active, .level-title.selected {
   background: #444;
@@ -337,6 +339,11 @@ canvas {
   background: green !important;
 }
 
+@media (min-width: 285px) {
+  .level-title {
+    width: 8em;
+  }
+}
 @media (min-width: 320px) {
   .header .level-nav-button {
     padding: 1em 0.5em;
