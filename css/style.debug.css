@@ -144,7 +144,7 @@ canvas {
   padding: 16px 15px;
   text-decoration: none;
 }
-.header a:hover, .header a:focus, .header a:active, .header a.selected {
+.no-touch .header a:hover, .header a:focus, .header a:active, .header a.selected {
   background: #444;
 }
 .header i {
@@ -165,7 +165,7 @@ canvas {
 .header .level-nav-button.disabled {
   color: rgba(255, 255, 255, 0.2);
 }
-.header .level-nav-button.disabled:hover, .header .level-nav-button.disabled:focus, .header .level-nav-button.disabled:active {
+.no-touch .header .level-nav-button.disabled:hover, .header .level-nav-button.disabled:focus, .header .level-nav-button.disabled:active {
   background: transparent;
 }
 
@@ -174,7 +174,7 @@ canvas {
   font-size: 0.8rem;
   font-weight: bold;
 }
-.level-title:hover, .level-title:focus, .level-title:active {
+.no-touch .level-title:hover, .level-title:focus, .level-title:active, .level-title.selected {
   background: #444;
 }
 
@@ -237,7 +237,7 @@ canvas {
   text-align: center;
   text-decoration: none;
 }
-.l2 a:hover, .l2 a:focus, .l2 a:active {
+.no-touch .l2 a:hover, .l2 a:focus, .l2 a:active {
   background: #CCC;
 }
 
@@ -321,6 +321,7 @@ canvas {
 /* Solution */
 #solution {
   bottom: auto;
+  padding: 0;
 }
 #solution.show {
   display: block;
@@ -328,6 +329,8 @@ canvas {
 
 #level-solution {
   font-size: inherit;
+  padding-bottom: 1.5em;
+  padding-top: 1.5em;
 }
 
 .level-done {

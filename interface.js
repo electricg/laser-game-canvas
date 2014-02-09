@@ -163,6 +163,7 @@ var init = function() {
 	// Solution
 	function eraseSolution() {
 		removeClass($solution, 'show');
+		removeClass($title, s);
 		document.body.removeEventListener('mousedown', checkSolution);
 		document.body.removeEventListener('touchstart', checkSolution);
 	}
@@ -186,6 +187,7 @@ var init = function() {
 			removeClass($$('.' + s), s);
 			removeClass($$('.' + o), o);
 			addClass($solution, 'show');
+			addClass(this, s);
 			document.body.on('mousedown', checkSolution);
 			document.body.on('touchstart', checkSolution);
 		}

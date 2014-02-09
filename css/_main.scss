@@ -60,7 +60,7 @@ canvas {
 		padding: 16px 15px;
 		text-decoration: none;
 
-		&:hover, &:focus, &:active, &.selected {
+		.no-touch &:hover, &:focus, &:active, &.selected {
 			background: #444;
 		}
 	}
@@ -83,7 +83,7 @@ canvas {
 		&.disabled {
 			color: rgba(255, 255, 255, 0.2);
 
-			&:hover, &:focus, &:active {
+			.no-touch &:hover, &:focus, &:active {
 				background: transparent;
 			}
 		}
@@ -94,7 +94,7 @@ canvas {
 	font-size: 0.8rem;
 	font-weight: bold;
 
-	&:hover, &:focus, &:active {
+	.no-touch &:hover, &:focus, &:active, &.selected {
 		background: #444;
 	}
 }
@@ -158,7 +158,7 @@ canvas {
 		text-align: center;
 		text-decoration: none;
 
-		&:hover, &:focus, &:active {
+		.no-touch &:hover, &:focus, &:active {
 			background: #CCC;
 		}
 
@@ -212,6 +212,7 @@ canvas {
 /* Solution */
 #solution {
 	bottom: auto;
+	padding: 0;
 
 	&.show {
 		display: block;
@@ -219,6 +220,8 @@ canvas {
 }
 #level-solution {
 	font-size: inherit;
+	padding-bottom: 1.5em;
+	padding-top: 1.5em;
 }
 .level-done {
 	background: green !important;
