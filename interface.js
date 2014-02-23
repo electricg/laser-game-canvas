@@ -1,12 +1,10 @@
 var l1 = 0, l2 = 0;
 var init = function() {
 	// Prevent scrolling http://www.html5rocks.com/en/mobile/touch/
-	document.body.on('touchmove', function(event) {
-		// Let the menu content scroll
-		if (!hasClass(event.target, 'menu-content')) {
-			prev(event);
-		}
-	}, false);
+	function noScroll(event) {
+		prev(event);
+	}
+	document.body.on('touchmove', noScroll);
 
 	var _headerHeight = document.getElementById('header').offsetHeight;
 
@@ -45,6 +43,7 @@ var init = function() {
 			if (hasClass(this, s)) {
 				removeClass(this, s);
 				removeClass($id, o);
+				document.body.on('touchmove', noScroll);
 			}
 			else {
 				for (var m = 0; m < $overlayLinks.length; m++) {
@@ -53,6 +52,7 @@ var init = function() {
 				}
 				addClass(this, s);
 				addClass($id, o);
+				document.body.removeEventListener('touchmove', noScroll);
 			}
 			eraseVictory();
 		});
