@@ -19,11 +19,16 @@ var init = function() {
 
 	// Resize
 	localStorage['reload'] = localStorage['reload'] || false;
-	function resize() {
+	var timeoutID;
+	function t() {
 		_headerHeight = document.getElementById('header').offsetHeight;
 		var w = document.documentElement.clientWidth,
 			h = document.documentElement.clientHeight - _headerHeight;
 		game.reload(w, h);
+	}
+	function resize() {
+		window.clearTimeout(timeoutID);
+		timeoutID = window.setTimeout(t, 500);
 	}
 	var $reload = $$('#reload');
 	if (localStorage['reload'] === "true") {
