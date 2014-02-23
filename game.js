@@ -161,7 +161,7 @@ var LaserGame = function() {
 
 		initTargets();
 		initVictory();
-		drawStuff();
+		drawStuff(true);
 		initLasers();
 		checkVictory();
 	};
@@ -322,7 +322,7 @@ var LaserGame = function() {
 	/**
 	 * Draw the initial game
 	 */
-	var drawStuff = function() {
+	var drawStuff = function(current) {
 		// draw cell numbers
 		if (DEBUG === true) {
 			drawCellNumbers();
@@ -334,8 +334,14 @@ var LaserGame = function() {
 		// draw targets background
 		drawTargetBg();
 
-		// draw normal cells
-		drawLayerCells(_opt.cells);
+		if (current) {
+			// draw current cells
+			drawCurrentCells();
+		}
+		else {
+			// draw normal cells
+			drawLayerCells(_opt.cells);
+		}
 
 		// draw grid
 		if (DEBUG === true) {
@@ -664,6 +670,18 @@ var LaserGame = function() {
 		for (var i = 0; i < m.length; i++) {
 			for (var h = 0; h < m[i].arr.length; h++) {
 				drawCellFromId(_ctxs['cells'], m[i].arr[h]);
+			}
+		}
+	};
+
+
+	/**
+	 * Draw current cells
+	 */
+	var drawCurrentCells = function() {
+		for (var i = 0; i < _cells.length; i++) {
+			if (_cells[i].type && _cells[i].type !== 'empty' && _cells[i].type !== 'none') {
+				drawCellFromId(_ctxs['cells'], i);
 			}
 		}
 	};
