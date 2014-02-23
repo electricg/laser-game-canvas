@@ -17,12 +17,30 @@ var init = function() {
 	var game = new LaserGame();
 	setGame();
 
-	window.onresize = function() {
+	// Resize
+	localStorage['reload'] = localStorage['reload'] || false;
+	function resize() {
 		_headerHeight = document.getElementById('header').offsetHeight;
 		var w = document.documentElement.clientWidth,
 			h = document.documentElement.clientHeight - _headerHeight;
 		game.reload(w, h);
-	};
+	}
+	var $reload = $$('#reload');
+	if (localStorage['reload'] === "true") {
+		$reload.checked = true;
+		window.addEventListener('resize', resize);
+	}
+	$reload.on('change', function(event) {
+		if (this.checked) {
+			localStorage['reload'] = true;
+			resize();
+			window.addEventListener('resize', resize);
+		}
+		else {
+			localStorage['reload'] = false;
+			window.removeEventListener('resize', resize);
+		}
+	});
 
 	// Overlay
 	var $overlayLinks = $('.js-overlay'),

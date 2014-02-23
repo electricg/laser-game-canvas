@@ -258,8 +258,8 @@ canvas {
 	}
 }
 
-/* Reset */
-#reset {
+/* Settings */
+.setting {
 	background: #FFF;
 	color: #000;
 	cursor: pointer;
@@ -268,4 +268,10 @@ canvas {
 	.no-touch &:hover, &:focus, &:active {
 		background: #CCC;
 	}
+}
+label[for=reload] {
+	display: block;
+}
+#reload {
+	float: right;
 }

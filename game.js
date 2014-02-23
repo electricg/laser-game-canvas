@@ -124,7 +124,6 @@ var LaserGame = function() {
 
 
 	this.reload = function(w, h) {
-		console.log('resize');
 		_docWidth = w;
 		_docHeight = h;
 

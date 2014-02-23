@@ -365,15 +365,23 @@ canvas {
   text-decoration: underline;
 }
 
-/* Reset */
-#reset {
+/* Settings */
+.setting {
   background: #FFF;
   color: #000;
   cursor: pointer;
   padding: 0.5em;
 }
-.no-touch #reset:hover, #reset:focus, #reset:active {
+.no-touch .setting:hover, .setting:focus, .setting:active {
   background: #CCC;
+}
+
+label[for=reload] {
+  display: block;
+}
+
+#reload {
+  float: right;
 }
 
 @media (min-width: 285px) {
