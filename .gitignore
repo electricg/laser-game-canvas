@@ -1,6 +1,7 @@
 other
 *.css.map
 *.txt
+*.wav
 
 
 # Read about how to use .gitignore: http://h5bp.com/ae
