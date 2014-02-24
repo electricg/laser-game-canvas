@@ -123,6 +123,11 @@ var LaserGame = function() {
 	};
 
 
+	/**
+	 * Redraw the current arrangement with the new size
+	 * @param {number} w - Width of the canvas
+	 * @param {number} h - Height of the canvas
+	 */
 	this.reload = function(w, h) {
 		_docWidth = w;
 		_docHeight = h;
@@ -166,6 +171,9 @@ var LaserGame = function() {
 	};
 
 
+	/**
+	 * Prepare the canvas elements
+	 */
 	var initCanvas = function() {
 		calcSizes();
 		
@@ -320,6 +328,7 @@ var LaserGame = function() {
 
 	/**
 	 * Draw the initial game
+	 * @param {boolean} true if drawing current cells arrangement
 	 */
 	var drawStuff = function(current) {
 		// draw cell numbers
@@ -334,7 +343,7 @@ var LaserGame = function() {
 		drawTargetBg();
 
 		if (current) {
-			// draw current cells
+			// draw current cells arrangement
 			drawCurrentCells();
 		}
 		else {
@@ -675,7 +684,7 @@ var LaserGame = function() {
 
 
 	/**
-	 * Draw current cells
+	 * Draw current cells arrangement
 	 */
 	var drawCurrentCells = function() {
 		for (var i = 0; i < _cells.length; i++) {
