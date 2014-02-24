@@ -15,7 +15,6 @@ var init = function() {
 	// var levels = JSON.parse(localStorage['levels']);
 
 	var game = new LaserGame();
-	setGame();
 
 	// Resize
 	localStorage['reload'] = localStorage['reload'] || false;
@@ -36,6 +35,7 @@ var init = function() {
 		window.addEventListener('resize', resize);
 	}
 	$reload.on('change', function(event) {
+		playSound('tap');
 		if (this.checked) {
 			localStorage['reload'] = true;
 			resize();
@@ -60,6 +60,7 @@ var init = function() {
 		else {
 			localStorage['audio'] = false;
 		}
+		playSound('tap');
 	});
 	function loadSound(prop) {
 		var request = new XMLHttpRequest();
@@ -81,7 +82,7 @@ var init = function() {
 		glass: 'sounds/Glass1.wav',
 		solution: 'sounds/Hint1.wav',
 		init: 'sounds/Lazer1.wav',
-		tap1: 'sounds/Tap01.wav',
+		tap: 'sounds/Tap01.wav',
 		mirror: 'sounds/Tap03.wav',
 		blackhole: 'sounds/Tap09.wav'
 	};
@@ -112,6 +113,7 @@ var init = function() {
 
 		$overlayLinks[i].on('click', function(event) {
 			prev(event);
+			playSound('tap');
 
 			var id = this.getAttribute('href'),
 				$id = $$(id);
@@ -235,6 +237,7 @@ var init = function() {
 	window.drawVictory = function() {
 		// alert('won');
 		addClass($victory, 'show');
+		playSound('victory');
 		$canvas.on('mousedown', eraseVictory);
 		$canvas.on('touchstart', eraseVictory);
 	};
@@ -271,8 +274,10 @@ var init = function() {
 		prev(event);
 		eraseSolution();
 		game.solution();
+		playSound('solution');
 	});
 	$title.on('click', function(event) {
+		playSound('tap');
 		if (hasClass($solution, 'show')) {
 			eraseSolution();
 		}
@@ -290,6 +295,7 @@ var init = function() {
 	var $reset = $$('#reset');
 	$reset.on('click', function(event) {
 		prev(event);
+		playSound('tap');
 		if (window.confirm('Do you really want to reset your progress?')) {
 			victory = [];
 			localStorage.victory = JSON.stringify(victory);
@@ -305,7 +311,9 @@ var init = function() {
 	function setGame() {
 		game.init(levels[l1][l2]);
 		setTitle();
+		playSound('init');
 	}
+	setGame();
 };
 
 window.onload = init;
