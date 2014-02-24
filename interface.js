@@ -77,11 +77,11 @@ var init = function() {
 	window.AudioContext = window.AudioContext || window.webkitAudioContext;
 	window.sourceAudio = {};
 	window.audios = {
+		init: 'sounds/init.wav',
 		victory: 'sounds/victory.wav',
 		prism: 'sounds/prism.wav',
 		glass: 'sounds/glass.wav',
 		solution: 'sounds/solution.wav',
-		init: 'sounds/init.wav',
 		tap: 'sounds/tap.wav',
 		mirror: 'sounds/mirror.wav',
 		blackhole: 'sounds/blackhole.wav'
@@ -94,10 +94,12 @@ var init = function() {
 	}
 	window.playSound = function(prop) {
 		if (localStorage['audio'] === "true") {
-			sourceAudio[prop] = context.createBufferSource();
-			sourceAudio[prop].buffer = audios[prop + '_buffer'];
-			sourceAudio[prop].connect(context.destination);
-			sourceAudio[prop].start(0);
+			if (audios[prop + '_buffer']) {
+				sourceAudio[prop] = context.createBufferSource();
+				sourceAudio[prop].buffer = audios[prop + '_buffer'];
+				sourceAudio[prop].connect(context.destination);
+				sourceAudio[prop].start(0);
+			}
 		}
 	}
 
@@ -308,12 +310,16 @@ var init = function() {
 	});
 
 	// Init level
-	function setGame() {
+	function setGame(immediately) {
 		game.init(levels[l1][l2]);
 		setTitle();
-		playSound('init');
+		if (!immediately) {
+			playSound('init');
+		}
 	}
-	setGame();
+	setGame(true);
+	removeClass(document.body, 'loading');
+	setTimeout("playSound('init')", 500);
 };
 
 window.onload = init;
