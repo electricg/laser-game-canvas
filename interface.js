@@ -61,6 +61,44 @@ var init = function() {
 			localStorage['audio'] = false;
 		}
 	});
+	function loadSound(prop) {
+		var request = new XMLHttpRequest();
+		request.open('GET', audios[prop], true);
+		request.responseType = 'arraybuffer';
+		// Decode asynchronously
+		request.onload = function() {
+			context.decodeAudioData(request.response, function(buffer) {
+				audios[prop + '_buffer'] = buffer;
+			});
+		}
+		request.send();
+	}
+	window.AudioContext = window.AudioContext || window.webkitAudioContext;
+	window.sourceAudio = {};
+	window.audios = {
+		victory: 'sounds/Bravo.wav',
+		prism: 'sounds/Crystal.wav',
+		glass: 'sounds/Glass1.wav',
+		solution: 'sounds/Hint1.wav',
+		init: 'sounds/Lazer1.wav',
+		tap1: 'sounds/Tap01.wav',
+		mirror: 'sounds/Tap03.wav',
+		blackhole: 'sounds/Tap09.wav'
+	};
+	var context = new AudioContext();
+	for (var prop in audios) {
+		if (audios.hasOwnProperty(prop)) {
+			loadSound(prop);
+		}
+	}
+	window.playSound = function(prop) {
+		if (localStorage['audio'] === "true") {
+			sourceAudio[prop] = context.createBufferSource();
+			sourceAudio[prop].buffer = audios[prop + '_buffer'];
+			sourceAudio[prop].connect(context.destination);
+			sourceAudio[prop].start(0);
+		}
+	}
 
 	// Overlay
 	var $overlayLinks = $('.js-overlay'),
