@@ -77,14 +77,14 @@ var init = function() {
 	window.AudioContext = window.AudioContext || window.webkitAudioContext;
 	window.sourceAudio = {};
 	window.audios = {
-		victory: 'sounds/Bravo.wav',
-		prism: 'sounds/Crystal.wav',
-		glass: 'sounds/Glass1.wav',
-		solution: 'sounds/Hint1.wav',
-		init: 'sounds/Lazer1.wav',
-		tap: 'sounds/Tap01.wav',
-		mirror: 'sounds/Tap03.wav',
-		blackhole: 'sounds/Tap09.wav'
+		victory: 'sounds/victory.wav',
+		prism: 'sounds/prism.wav',
+		glass: 'sounds/glass.wav',
+		solution: 'sounds/solution.wav',
+		init: 'sounds/init.wav',
+		tap: 'sounds/tap.wav',
+		mirror: 'sounds/mirror.wav',
+		blackhole: 'sounds/blackhole.wav'
 	};
 	var context = new AudioContext();
 	for (var prop in audios) {
