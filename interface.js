@@ -47,6 +47,21 @@ var init = function() {
 		}
 	});
 
+	// Audio
+	localStorage['audio'] = localStorage['audio'] || false;
+	var $audio = $$('#audio');
+	if (localStorage['audio'] === "true") {
+		$audio.checked = true;
+	}
+	$audio.on('change', function(event) {
+		if (this.checked) {
+			localStorage['audio'] = true;
+		}
+		else {
+			localStorage['audio'] = false;
+		}
+	});
+
 	// Overlay
 	var $overlayLinks = $('.js-overlay'),
 		$overlayDivs = {},

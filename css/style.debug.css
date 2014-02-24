@@ -376,11 +376,11 @@ canvas {
   background: #CCC;
 }
 
-label[for=reload] {
+label.setting {
   display: block;
 }
 
-#reload {
+label.setting input {
   float: right;
 }
 
