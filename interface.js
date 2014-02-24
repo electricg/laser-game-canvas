@@ -15,7 +15,6 @@ var init = function() {
 	// var levels = JSON.parse(localStorage['levels']);
 
 	var game = new LaserGame();
-	setGame();
 
 	// Resize
 	localStorage['reload'] = localStorage['reload'] || false;
@@ -36,6 +35,7 @@ var init = function() {
 		window.addEventListener('resize', resize);
 	}
 	$reload.on('change', function(event) {
+		playSound('tap');
 		if (this.checked) {
 			localStorage['reload'] = true;
 			resize();
@@ -46,6 +46,60 @@ var init = function() {
 			window.removeEventListener('resize', resize);
 		}
 	});
+
+	// Audio
+	localStorage['audio'] = localStorage['audio'] || false;
+	var $audio = $$('#audio');
+	if (localStorage['audio'] === "true") {
+		$audio.checked = true;
+	}
+	$audio.on('change', function(event) {
+		if (this.checked) {
+			localStorage['audio'] = true;
+		}
+		else {
+			localStorage['audio'] = false;
+		}
+		playSound('tap');
+	});
+	function loadSound(prop) {
+		var request = new XMLHttpRequest();
+		request.open('GET', audios[prop], true);
+		request.responseType = 'arraybuffer';
+		// Decode asynchronously
+		request.onload = function() {
+			context.decodeAudioData(request.response, function(buffer) {
+				audios[prop + '_buffer'] = buffer;
+			});
+		}
+		request.send();
+	}
+	window.AudioContext = window.AudioContext || window.webkitAudioContext;
+	window.sourceAudio = {};
+	window.audios = {
+		victory: 'sounds/victory.wav',
+		prism: 'sounds/prism.wav',
+		glass: 'sounds/glass.wav',
+		solution: 'sounds/solution.wav',
+		init: 'sounds/init.wav',
+		tap: 'sounds/tap.wav',
+		mirror: 'sounds/mirror.wav',
+		blackhole: 'sounds/blackhole.wav'
+	};
+	var context = new AudioContext();
+	for (var prop in audios) {
+		if (audios.hasOwnProperty(prop)) {
+			loadSound(prop);
+		}
+	}
+	window.playSound = function(prop) {
+		if (localStorage['audio'] === "true") {
+			sourceAudio[prop] = context.createBufferSource();
+			sourceAudio[prop].buffer = audios[prop + '_buffer'];
+			sourceAudio[prop].connect(context.destination);
+			sourceAudio[prop].start(0);
+		}
+	}
 
 	// Overlay
 	var $overlayLinks = $('.js-overlay'),
@@ -59,6 +113,7 @@ var init = function() {
 
 		$overlayLinks[i].on('click', function(event) {
 			prev(event);
+			playSound('tap');
 
 			var id = this.getAttribute('href'),
 				$id = $$(id);
@@ -182,6 +237,7 @@ var init = function() {
 	window.drawVictory = function() {
 		// alert('won');
 		addClass($victory, 'show');
+		playSound('victory');
 		$canvas.on('mousedown', eraseVictory);
 		$canvas.on('touchstart', eraseVictory);
 	};
@@ -218,8 +274,10 @@ var init = function() {
 		prev(event);
 		eraseSolution();
 		game.solution();
+		playSound('solution');
 	});
 	$title.on('click', function(event) {
+		playSound('tap');
 		if (hasClass($solution, 'show')) {
 			eraseSolution();
 		}
@@ -237,6 +295,7 @@ var init = function() {
 	var $reset = $$('#reset');
 	$reset.on('click', function(event) {
 		prev(event);
+		playSound('tap');
 		if (window.confirm('Do you really want to reset your progress?')) {
 			victory = [];
 			localStorage.victory = JSON.stringify(victory);
@@ -252,7 +311,9 @@ var init = function() {
 	function setGame() {
 		game.init(levels[l1][l2]);
 		setTitle();
+		playSound('init');
 	}
+	setGame();
 };
 
 window.onload = init;

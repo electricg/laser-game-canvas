@@ -898,6 +898,11 @@ var LaserGame = function() {
 			// draw new cell
 			drawCellFromId(_ctxs['cells'], cell);
 
+			// play sound
+			if (_cells[cell].type === 'prism' || _cells[cell].type === 'mirror' || _cells[cell].type === 'glass' || _cells[cell].type === 'blackhole') {
+				playSound(_cells[cell].type);
+			}
+
 			initVictory();
 
 			// update lasers
