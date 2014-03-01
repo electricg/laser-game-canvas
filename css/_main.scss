@@ -98,6 +98,7 @@ canvas {
 	padding-bottom: 16px;
 	padding-top: 16px;
 	width: 7em;
+	white-space: nowrap;
 
 	.no-touch &:hover, &:focus, &:active, &.selected {
 		background: #444;
@@ -145,6 +146,7 @@ canvas {
 	cursor: pointer;
 	display: table-cell;
 	padding-right: 1em !important;
+	text-align: left;
 	vertical-align: middle;
 	width: 1px;
 	white-space: nowrap;
@@ -152,6 +154,12 @@ canvas {
 	.no-touch &:hover, &:focus, &:active {
 		background: #CCC;
 		color: #333;
+	}
+
+	sub {
+		display: block;
+		font-size: 70%;
+		text-align: right;
 	}
 }
 .l2 {

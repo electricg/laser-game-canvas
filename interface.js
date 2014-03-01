@@ -153,7 +153,7 @@ var init = function() {
 			len2 = levels[m].length;
 
 		$ul2.className = 'l2';
-		$span.innerHTML = 'Level ' + (m + 1);
+		$span.innerHTML = levelsName[m]['a'] + '<sub>' + levelsName[m]['b'] + '</sub>';
 		$span.className = 'l1-title';
 		$li.appendChild($span);
 		$li.appendChild($ul2);
@@ -223,7 +223,7 @@ var init = function() {
 
 	// Level title
 	function setTitle() {
-		$title.innerHTML = 'L1: ' + (l1 + 1) + ' - L2: ' + (l2 + 1);
+		$title.innerHTML = levelsName[l1]['a'] + ': ' + (l2 + 1);
 	}
 
 	// Victory
