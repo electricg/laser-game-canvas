@@ -12,12 +12,16 @@
  * cell that both let the laser go through and reflects it with a 90deg angle;
  * == prism:
  * the laser is translated to the opposite side of the entrance and it goes out with the same direction it came in;
+ * == portal:
+ * the laser is teleported to the other portal cell, on its opposite side of the entrace and it goes out with the same direction it came into the first cell;
  * == mirror_stuck:
  * same as mirror, but without the possibility to move the cell;
  * == blackhole_stuck:
- * same as blackhole, but without the possibility to move the cell.
+ * same as blackhole, but without the possibility to move the cell;
  * == glass_stuck:
- * same as glass, but without the possibility to move the cell.
+ * same as glass, but without the possibility to move the cell;
+  * == portal_stuck:
+ * same as portal, but without the possibility to move the cell.
  */
 
 
@@ -437,10 +441,6 @@ var LaserGame = function() {
 			drawCircle(ctx, x + _screwDistance, y + _screwDistance, _screwRadius, COLORS[type]);
 		}
 
-		if (type.indexOf('stuck') != -1) {
-			drawScrews(ctx, x, y);
-		}
-
 		if (type === 'prism') {
 			var xt = x + 3,
 				yt = y + 3,
@@ -456,6 +456,21 @@ var LaserGame = function() {
 			drawRect(ctx, xt+_cellWt-b/2, yt+_cellHt/2+b/2, xt+_cellWt, yt+_cellHt/2+b, xt+_cellWt/2+b, yt+_cellHt, xt+_cellWt/2+b/2, yt+_cellHt-b/2, COLORS['empty'], COLORS['prism']);
 			drawRect(ctx, xt+b/2, yt+_cellHt/2+b/2, xt+_cellWt/2-b/2, yt+_cellHt-b/2, xt+_cellWt/2-b, yt+_cellHt, xt, yt+_cellHt/2+b, COLORS['empty'], COLORS['prism']);
 			drawRect(ctx, xt+_cellWt/2-b, yt, xt+_cellWt/2-b/2, yt+b/2, xt+b/2, yt+_cellHt/2-b/2, xt, yt+_cellHt/2-b, COLORS['glass'], COLORS['prism']);
+		}
+
+		if (type === 'portal' || type === 'portal_stuck') {
+			var rt = _cellW / 12,
+				times = 4,
+				cx = x + _cellW_2,
+				cy = y + _cellH_2;
+			for (var i = 1; i <= times; i++) {
+				drawCircle(ctx, cx, cy, rt * i, COLORS['none']);
+				ctx.stroke();
+			}
+		}
+
+		if (type.indexOf('stuck') != -1) {
+			drawScrews(ctx, x, y);
 		}
 	};
 
@@ -740,9 +755,9 @@ var LaserGame = function() {
 
 
 	/**
-	 * Calc point coordinates given cell id and side of the cell (n, e, s, w)
+	 * Calc point coordinates given cell id and side of the cell (n, e, s, w, m)
 	 * @param {number} cell - Cell id
-	 * @param {string} side - Side of the cell. Possible values n e s w (noth east south west)
+	 * @param {string} side - Side of the cell. Possible values n e s w m (north east south west middle)
 	 * @returns {object} x,y coordinate
 	 */
 	var calcCoordinate = function(cell, side) {
@@ -767,6 +782,11 @@ var LaserGame = function() {
 
 			case 'w':
 				res.x = c.x;
+				res.y = c.y + _cellH_2;
+				break;
+
+			case 'm':
+				res.x = c.x + _cellW_2;
 				res.y = c.y + _cellH_2;
 				break;
 		}
@@ -817,9 +837,7 @@ var LaserGame = function() {
 		// check if it's possible to move this cell
 		if (_cells[cell].type === 'empty' ||
 			_cells[cell].type === 'none' ||
-			_cells[cell].type === 'mirror_stuck' ||
-			_cells[cell].type === 'blackhole_stuck' ||
-			_cells[cell].type === 'glass_stuck') {
+			_cells[cell].type.indexOf('stuck') !== -1) {
 			return false;
 		}
 		else {
@@ -931,6 +949,21 @@ var LaserGame = function() {
 			return true;
 		}
 		return false;
+	};
+
+
+	/**
+	 * Find the other portal cell
+	 * @param {number} thisPortal - Cell id
+	 * @returns {number} other portal cell id
+	 */
+	var findOtherPortal = function(thisPortal) {
+		for (var i = 1; i <= _cellsLength; i++) {
+			if (_cells[i].type.indexOf('portal') !== -1 && i !== thisPortal) {
+				return i;
+			}
+		}
+		return 0;
 	};
 
 
@@ -1253,6 +1286,24 @@ var LaserGame = function() {
 					endDir = dir;
 					endSide = oppositeSide(side);
 					endPoint = calcCoordinate(cell, endSide);
+					break;
+
+				case 'portal':
+				case 'portal_stuck':
+					endDir = dir;
+					endSide = oppositeSide(side);
+
+					// draw laser ending in the center of this portal cell
+					endPoint = calcCoordinate(cell, 'm');
+					drawLine(_ctxs['laser'], startPoint.x, startPoint.y, endPoint.x, endPoint.y);
+					
+					// draw laser starting in the center of the other portal cell
+					cell = findOtherPortal(cell);
+					startPoint = calcCoordinate(cell, 'm');
+					endPoint = calcCoordinate(cell, endSide);
+					drawLine(_ctxs['laser'], startPoint.x, startPoint.y, endPoint.x, endPoint.y);
+
+					startPoint = endPoint;
 					break;
 			}
 		}

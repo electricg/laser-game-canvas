@@ -20,9 +20,11 @@ var COLORS = {
 	blackhole : rgba('#444', ALPHA),
 	glass : rgba('#FFF', ALPHA),
 	prism : rgba('#CCC', ALPHA),
+	portal : rgba('#CCC', ALPHA),
 	mirror_stuck : rgba('#FFF', ALPHA),
 	blackhole_stuck : rgba('#444', ALPHA),
-	glass_stuck : rgba('#FFF', ALPHA)
+	glass_stuck : rgba('#FFF', ALPHA),
+	portal_stuck : rgba('#CCC', ALPHA)
 };
 var LAYOUT = {
 	padding : 1, // left+right space around the grid, in cell size
