@@ -46,12 +46,18 @@ canvas {
 	font-size: 0;
 
 	ul {
+		display: table;
 		padding: 2px 0;
 		text-align: center;
+		width: 100%;
 	}
 	li {
-		display: inline-block;
+		display: table-cell;
 		vertical-align: middle;
+		width: 16%;
+	}
+	.level-title-wrapper {
+		width: auto;
 	}
 	a {
 		background: #333;
@@ -62,7 +68,7 @@ canvas {
 		font-size: 0;
 		line-height: 1;
 		margin: 0 1px;
-		padding: 12px 9px;
+		padding: 12px 0;
 		text-decoration: none;
 
 		.no-touch &:hover, &:focus, &:active, &.selected {
@@ -75,15 +81,10 @@ canvas {
 	}
 
 	.level-nav-button {
-		border-radius: 2px;
-		display: inline-block;
-		font-size: 0;
 		padding: 8px 0;
 
 		i {
-			display: inline-block;
 			font-size: 1.5rem;
-			padding: 0 12px;
 		}
 		&.disabled {
 			color: rgba(255, 255, 255, 0.2);
@@ -102,7 +103,6 @@ canvas {
 	padding-bottom: 18px;
 	padding-top: 6px;
 	position: relative;
-	width: 7em;
 	white-space: nowrap;
 
 	.no-touch &:hover, &:focus, &:active, &.selected {

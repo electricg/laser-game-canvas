@@ -130,12 +130,18 @@ canvas {
   font-size: 0;
 }
 .header ul {
+  display: table;
   padding: 2px 0;
   text-align: center;
+  width: 100%;
 }
 .header li {
-  display: inline-block;
+  display: table-cell;
   vertical-align: middle;
+  width: 16%;
+}
+.header .level-title-wrapper {
+  width: auto;
 }
 .header a {
   background: #333;
@@ -146,7 +152,7 @@ canvas {
   font-size: 0;
   line-height: 1;
   margin: 0 1px;
-  padding: 12px 9px;
+  padding: 12px 0;
   text-decoration: none;
 }
 .no-touch .header a:hover, .header a:focus, .header a:active, .header a.selected {
@@ -157,15 +163,10 @@ canvas {
   line-height: inherit;
 }
 .header .level-nav-button {
-  border-radius: 2px;
-  display: inline-block;
-  font-size: 0;
   padding: 8px 0;
 }
 .header .level-nav-button i {
-  display: inline-block;
   font-size: 1.5rem;
-  padding: 0 12px;
 }
 .header .level-nav-button.disabled {
   color: rgba(255, 255, 255, 0.2);
@@ -182,7 +183,6 @@ canvas {
   padding-bottom: 18px;
   padding-top: 6px;
   position: relative;
-  width: 7em;
   white-space: nowrap;
 }
 .no-touch .level-title:hover, .level-title:focus, .level-title:active, .level-title.selected {
@@ -426,26 +426,13 @@ body.loading:after {
 }
 
 @media (min-width: 285px) {
-  .level-title {
-    width: 8em;
-  }
-
   .victory {
     font-size: 1em;
-  }
-
-  .header a {
-    padding-left: 12px;
-    padding-right: 12px;
-  }
-  .header .level-nav-button i {
-    padding-left: 16px;
-    padding-right: 16px;
   }
 }
 @media (min-width: 320px) {
   .header .level-nav-button {
-    padding: 1em 0.5em;
+    padding: 1em 0;
   }
   .header .level-nav-button i {
     font-size: 2.5rem;
@@ -453,27 +440,27 @@ body.loading:after {
 
   .level-title {
     font-size: 1rem;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
+    padding-bottom: 16px;
+    padding-top: 4px;
   }
 }
 @media (min-width: 380px) {
   .header a {
     font-size: 1rem;
-    padding: 1em 0.2em;
+    padding-bottom: 11px;
   }
   .header i {
     padding-right: 0.5em;
   }
+  .header .level-nav-button {
+    font-size: 0;
+  }
+  .header .level-nav-button i {
+    padding-right: 0;
+  }
 
   .l2 a {
     padding: 0;
-  }
-}
-@media (min-width: 400px) {
-  .header a {
-    padding-left: 0.5em;
-    padding-right: 0.5em;
   }
 }
 
