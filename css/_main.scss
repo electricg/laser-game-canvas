@@ -68,7 +68,7 @@ canvas {
 		font-size: 0;
 		line-height: 1;
 		margin: 0 1px;
-		padding: 12px 0;
+		padding: 16px 0;
 		text-decoration: none;
 
 		.no-touch &:hover, &:focus, &:active, &.selected {
@@ -81,7 +81,7 @@ canvas {
 	}
 
 	.level-nav-button {
-		padding: 8px 0;
+		padding: 12px 0;
 
 		i {
 			font-size: 1.5rem;
@@ -100,8 +100,8 @@ canvas {
 	cursor: pointer;
 	font-size: 0.8rem;
 	font-weight: bold;
-	padding-bottom: 18px;
-	padding-top: 6px;
+	padding-bottom: 22px;
+	padding-top: 10px;
 	position: relative;
 	white-space: nowrap;
 
@@ -132,7 +132,7 @@ canvas {
 	padding: 0.5em;
 	position: absolute;
 	right: 0;
-	top: 2.9rem;
+	top: 3.4rem;
 	z-index: 2;
 }
 .overlay-show {
