@@ -46,7 +46,7 @@ canvas {
 	font-size: 0;
 
 	ul {
-		padding: 0;
+		padding: 2px 0;
 		text-align: center;
 	}
 	li {
@@ -54,11 +54,15 @@ canvas {
 		vertical-align: middle;
 	}
 	a {
+		background: #333;
+		border: 1px solid #444;
+		border-radius: 2px;
 		color: #FFF;
 		display: block;
 		font-size: 0;
-		line-height: 1.4;
-		padding: 16px 15px;
+		line-height: 1;
+		margin: 0 1px;
+		padding: 12px 9px;
 		text-decoration: none;
 
 		.no-touch &:hover, &:focus, &:active, &.selected {
@@ -71,15 +75,15 @@ canvas {
 	}
 
 	.level-nav-button {
-		border-radius: 5px;
+		border-radius: 2px;
 		display: inline-block;
 		font-size: 0;
-		padding: 0;
+		padding: 8px 0;
 
 		i {
 			display: inline-block;
 			font-size: 1.5rem;
-			padding: 0 15px;
+			padding: 0 12px;
 		}
 		&.disabled {
 			color: rgba(255, 255, 255, 0.2);
@@ -91,17 +95,29 @@ canvas {
 	}
 }
 .level-title {
+	border-radius: 2px;
 	cursor: pointer;
 	font-size: 0.8rem;
 	font-weight: bold;
-	text-align: left;
-	padding-bottom: 16px;
-	padding-top: 16px;
+	padding-bottom: 18px;
+	padding-top: 6px;
+	position: relative;
 	width: 7em;
 	white-space: nowrap;
 
 	.no-touch &:hover, &:focus, &:active, &.selected {
 		background: #444;
+	}
+
+	&:after {
+		bottom: 0;
+		content: "tap for solution";
+		font-size: 0.6em;
+		font-weight: normal;
+		left: 0;
+		letter-spacing: 1px;
+		position: absolute;
+		right: 0;
 	}
 }
 
@@ -116,7 +132,7 @@ canvas {
 	padding: 0.5em;
 	position: absolute;
 	right: 0;
-	top: 3.45rem;
+	top: 2.9rem;
 	z-index: 2;
 }
 .overlay-show {
