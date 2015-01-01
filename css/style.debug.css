@@ -433,6 +433,15 @@ body.loading:after {
   .victory {
     font-size: 1em;
   }
+
+  .header a {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .header .level-nav-button i {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 }
 @media (min-width: 320px) {
   .header .level-nav-button {
