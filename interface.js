@@ -17,33 +17,59 @@ var init = function() {
 	var game = new LaserGame();
 
 	// Resize
+	window.requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame;
 	localStorage['reload'] = localStorage['reload'] || false;
-	var timeoutID;
 	function t() {
 		_headerHeight = document.getElementById('header').offsetHeight;
 		var w = document.documentElement.clientWidth,
 			h = document.documentElement.clientHeight - _headerHeight;
 		game.reload(w, h);
 	}
-	function resize() {
-		window.clearTimeout(timeoutID);
-		timeoutID = window.setTimeout(t, 500);
-	}
+	// https://developer.mozilla.org/en-US/docs/Web/Events/resize#requestAnimationFrame
+	var optimizedResize = (function() {
+		var timeoutID;
+		var running = false;
+		// fired on resize event
+		function resize() {
+			if (!running) {
+				running = true;
+				if (window.requestAnimationFrame) {
+					window.requestAnimationFrame(runCallbacks);
+				}
+				else {
+					clearTimeout(timeoutID);
+					timeoutID = setTimeout(runCallbacks, 500);
+				}
+			}
+		}
+		function runCallbacks() {
+			t();
+			running = false;
+		}
+		return {
+			init: function() {
+				window.addEventListener('resize', resize);
+			},
+			stop: function() {
+				window.removeEventListener('resize', resize);
+			}
+		};
+	}());
 	var $reload = $$('#reload');
 	if (localStorage['reload'] === "true") {
 		$reload.checked = true;
-		window.addEventListener('resize', resize);
+		optimizedResize.init();
 	}
 	$reload.on('change', function(event) {
 		playSound('tap');
 		if (this.checked) {
 			localStorage['reload'] = true;
-			resize();
-			window.addEventListener('resize', resize);
+			t();
+			optimizedResize.init();
 		}
 		else {
 			localStorage['reload'] = false;
-			window.removeEventListener('resize', resize);
+			optimizedResize.stop();
 		}
 	});
 
