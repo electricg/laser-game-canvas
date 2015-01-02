@@ -397,18 +397,19 @@ i {
   background: #FFF;
   color: #000;
   cursor: pointer;
+  display: block;
   padding: 0.5em;
 }
 .no-touch .setting:hover, .setting:focus, .setting:active {
   background: #CCC;
 }
 
-label.setting {
-  display: block;
+.setting input {
+  float: right;
 }
 
-label.setting input {
-  float: right;
+.hide {
+  display: none;
 }
 
 /* Loading screen */

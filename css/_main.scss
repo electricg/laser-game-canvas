@@ -285,17 +285,18 @@ i {
 	background: #FFF;
 	color: #000;
 	cursor: pointer;
+	display: block;
 	padding: 0.5em;
 
 	.no-touch &:hover, &:focus, &:active {
 		background: #CCC;
 	}
 }
-label.setting {
-	display: block;
-}
-label.setting input {
+.setting input {
 	float: right;
+}
+.hide {
+	display: none;
 }
 
 /* Loading screen */

@@ -74,59 +74,65 @@ var init = function() {
 	});
 
 	// Audio
-	localStorage['audio'] = localStorage['audio'] || false;
 	var $audio = $$('#audio');
-	if (localStorage['audio'] === "true") {
-		$audio.checked = true;
-	}
-	$audio.on('change', function(event) {
-		if (this.checked) {
-			localStorage['audio'] = true;
-		}
-		else {
-			localStorage['audio'] = false;
-		}
-		playSound('tap');
-	});
-	function loadSound(prop) {
-		var request = new XMLHttpRequest();
-		request.open('GET', audios[prop], true);
-		request.responseType = 'arraybuffer';
-		// Decode asynchronously
-		request.onload = function() {
-			context.decodeAudioData(request.response, function(buffer) {
-				audios[prop + '_buffer'] = buffer;
-			});
-		}
-		request.send();
-	}
 	window.AudioContext = window.AudioContext || window.webkitAudioContext;
-	window.sourceAudio = {};
-	window.audios = {
-		init: 'sounds/init.wav',
-		victory: 'sounds/victory.wav',
-		prism: 'sounds/prism.wav',
-		glass: 'sounds/glass.wav',
-		solution: 'sounds/solution.wav',
-		tap: 'sounds/tap.wav',
-		mirror: 'sounds/mirror.wav',
-		blackhole: 'sounds/blackhole.wav'
-	};
-	var context = new AudioContext();
-	for (var prop in audios) {
-		if (audios.hasOwnProperty(prop)) {
-			loadSound(prop);
-		}
-	}
-	window.playSound = function(prop) {
+	if (window.AudioContext) {
+		localStorage['audio'] = localStorage['audio'] || false;
 		if (localStorage['audio'] === "true") {
-			if (audios[prop + '_buffer']) {
-				sourceAudio[prop] = context.createBufferSource();
-				sourceAudio[prop].buffer = audios[prop + '_buffer'];
-				sourceAudio[prop].connect(context.destination);
-				sourceAudio[prop].start(0);
+			$audio.checked = true;
+		}
+		$audio.on('change', function(event) {
+			if (this.checked) {
+				localStorage['audio'] = true;
+			}
+			else {
+				localStorage['audio'] = false;
+			}
+			playSound('tap');
+		});
+		function loadSound(prop) {
+			var request = new XMLHttpRequest();
+			request.open('GET', audios[prop], true);
+			request.responseType = 'arraybuffer';
+			// Decode asynchronously
+			request.onload = function() {
+				context.decodeAudioData(request.response, function(buffer) {
+					audios[prop + '_buffer'] = buffer;
+				});
+			}
+			request.send();
+		}
+		window.sourceAudio = {};
+		window.audios = {
+			init: 'sounds/init.wav',
+			victory: 'sounds/victory.wav',
+			prism: 'sounds/prism.wav',
+			glass: 'sounds/glass.wav',
+			solution: 'sounds/solution.wav',
+			tap: 'sounds/tap.wav',
+			mirror: 'sounds/mirror.wav',
+			blackhole: 'sounds/blackhole.wav'
+		};
+		var context = new AudioContext();
+		for (var prop in audios) {
+			if (audios.hasOwnProperty(prop)) {
+				loadSound(prop);
 			}
 		}
+		window.playSound = function(prop) {
+			if (localStorage['audio'] === "true") {
+				if (audios[prop + '_buffer']) {
+					sourceAudio[prop] = context.createBufferSource();
+					sourceAudio[prop].buffer = audios[prop + '_buffer'];
+					sourceAudio[prop].connect(context.destination);
+					sourceAudio[prop].start(0);
+				}
+			}
+		}
+	}
+	else {
+		addClass($audio.parentNode, 'hide');
+		window.playSound = function(prop) {}
 	}
 
 	// Overlay
