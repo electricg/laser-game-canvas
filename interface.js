@@ -341,8 +341,14 @@ var init = function() {
 		}
 	});
 
+	// Load from the last visited level
+	l1 = (localStorage['l1'] || l1) * 1;
+	l2 = (localStorage['l2'] || l2) * 1;
+
 	// Init level
 	function setGame(immediately) {
+		localStorage['l1'] = l1 * 1;
+		localStorage['l2'] = l2 * 1;
 		game.init(levels[l1][l2]);
 		setTitle();
 		if (!immediately) {
