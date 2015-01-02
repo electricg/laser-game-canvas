@@ -44,54 +44,52 @@ canvas {
 	background: #000;
 	border-bottom: 1px solid #CCC;
 	font-size: 0;
+}
+.main-nav {
+	display: table;
+	padding: 2px 0;
+	text-align: center;
+	width: 100%;
+}
+.main-nav-item {
+	display: table-cell;
+	vertical-align: middle;
+	width: 16%;
+}
+.level-title-wrapper {
+	width: auto;
+}
+a {
+	background: #333;
+	border: 1px solid #444;
+	border-radius: 2px;
+	color: #FFF;
+	display: block;
+	font-size: 0;
+	line-height: 1;
+	margin: 0 1px;
+	padding: 16px 0;
+	text-decoration: none;
 
-	ul {
-		display: table;
-		padding: 2px 0;
-		text-align: center;
-		width: 100%;
+	.no-touch &:hover, &:focus, &:active, &.selected {
+		background: #444;
 	}
-	li {
-		display: table-cell;
-		vertical-align: middle;
-		width: 16%;
-	}
-	.level-title-wrapper {
-		width: auto;
-	}
-	a {
-		background: #333;
-		border: 1px solid #444;
-		border-radius: 2px;
-		color: #FFF;
-		display: block;
-		font-size: 0;
-		line-height: 1;
-		margin: 0 1px;
-		padding: 16px 0;
-		text-decoration: none;
+}
+i {
+	font-size: 1rem;
+}
 
-		.no-touch &:hover, &:focus, &:active, &.selected {
-			background: #444;
-		}
-	}
+.level-nav-button {
+	padding: 12px 0;
+
 	i {
-		font-size: 1rem;
-		line-height: inherit;
+		font-size: 1.5rem;
 	}
+	&.disabled {
+		color: rgba(255, 255, 255, 0.2);
 
-	.level-nav-button {
-		padding: 12px 0;
-
-		i {
-			font-size: 1.5rem;
-		}
-		&.disabled {
-			color: rgba(255, 255, 255, 0.2);
-
-			.no-touch &:hover, &:focus, &:active {
-				background: transparent;
-			}
+		.no-touch &:hover, &:focus, &:active {
+			background: transparent;
 		}
 	}
 }

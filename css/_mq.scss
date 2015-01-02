@@ -5,13 +5,11 @@
 }
 
 @media (min-width: 320px) {
-	.header {
-		.level-nav-button {
-			padding: 4px 0;
+	.level-nav-button {
+		padding: 4px 0;
 
-			i {
-				font-size: 2.5rem;
-			}
+		i {
+			font-size: 2.5rem;
 		}
 	}
 	.level-title {
@@ -22,20 +20,18 @@
 }
 
 @media (min-width: 380px) {
-	.header {
-		a {
-			font-size: 1rem;
-			padding-bottom: 15px;
-		}
-		i {
-			padding-right: 0.5em;
-		}
-		.level-nav-button {
-			font-size: 0;
+	a {
+		font-size: 1rem;
+		padding-bottom: 15px;
+	}
+	i {
+		padding-right: 0.5em;
+	}
+	.level-nav-button {
+		font-size: 0;
 
-			i {
-				padding-right: 0;
-			}
+		i {
+			padding-right: 0;
 		}
 	}
 	.l2 a {

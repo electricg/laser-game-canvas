@@ -129,21 +129,25 @@ canvas {
   border-bottom: 1px solid #CCC;
   font-size: 0;
 }
-.header ul {
+
+.main-nav {
   display: table;
   padding: 2px 0;
   text-align: center;
   width: 100%;
 }
-.header li {
+
+.main-nav-item {
   display: table-cell;
   vertical-align: middle;
   width: 16%;
 }
-.header .level-title-wrapper {
+
+.level-title-wrapper {
   width: auto;
 }
-.header a {
+
+a {
   background: #333;
   border: 1px solid #444;
   border-radius: 2px;
@@ -155,23 +159,24 @@ canvas {
   padding: 16px 0;
   text-decoration: none;
 }
-.no-touch .header a:hover, .header a:focus, .header a:active, .header a.selected {
+.no-touch a:hover, a:focus, a:active, a.selected {
   background: #444;
 }
-.header i {
+
+i {
   font-size: 1rem;
-  line-height: inherit;
 }
-.header .level-nav-button {
+
+.level-nav-button {
   padding: 12px 0;
 }
-.header .level-nav-button i {
+.level-nav-button i {
   font-size: 1.5rem;
 }
-.header .level-nav-button.disabled {
+.level-nav-button.disabled {
   color: rgba(255, 255, 255, 0.2);
 }
-.no-touch .header .level-nav-button.disabled:hover, .header .level-nav-button.disabled:focus, .header .level-nav-button.disabled:active {
+.no-touch .level-nav-button.disabled:hover, .level-nav-button.disabled:focus, .level-nav-button.disabled:active {
   background: transparent;
 }
 
@@ -431,10 +436,10 @@ body.loading:after {
   }
 }
 @media (min-width: 320px) {
-  .header .level-nav-button {
+  .level-nav-button {
     padding: 4px 0;
   }
-  .header .level-nav-button i {
+  .level-nav-button i {
     font-size: 2.5rem;
   }
 
@@ -445,17 +450,19 @@ body.loading:after {
   }
 }
 @media (min-width: 380px) {
-  .header a {
+  a {
     font-size: 1rem;
     padding-bottom: 15px;
   }
-  .header i {
+
+  i {
     padding-right: 0.5em;
   }
-  .header .level-nav-button {
+
+  .level-nav-button {
     font-size: 0;
   }
-  .header .level-nav-button i {
+  .level-nav-button i {
     padding-right: 0;
   }
 
