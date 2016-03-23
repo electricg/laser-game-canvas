@@ -18,7 +18,7 @@ var init = function() {
 
   // Resize
   window.requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame;
-  localStorage['reload'] = localStorage['reload'] || false;
+  localStorage['reload'] = localStorage['reload'] || true;
   function t() {
     _headerHeight = document.getElementById('header').offsetHeight;
     var w = document.documentElement.clientWidth,
@@ -77,7 +77,7 @@ var init = function() {
   var $audio = $$('#audio');
   window.AudioContext = window.AudioContext || window.webkitAudioContext;
   if (window.AudioContext) {
-    localStorage['audio'] = localStorage['audio'] || false;
+    localStorage['audio'] = localStorage['audio'] || true;
     if (localStorage['audio'] === "true") {
       $audio.checked = true;
     }
